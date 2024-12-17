@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" data-bs-theme="light">
+<head>
+    <title>Arbat Real Estate</title>
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="arbt.kz">
+    <meta name="description" content="Агентство недвижимости «АРБАТ РИЭЛ ЭСТЕЙТ (Arbat Real Estate)»">
+
+    <!-- Dark mode -->
+    <script>
+        const storedTheme = localStorage.getItem('theme')
+
+        const getPreferredTheme = () => {
+            if (storedTheme) {
+                return storedTheme
+            }
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+
+        const setTheme = function (theme) {
+            if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-bs-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-bs-theme', theme)
+            }
+        }
+
+        setTheme(getPreferredTheme())
+
+        window.addEventListener('DOMContentLoaded', () => {
+            var el = document.querySelector('.theme-icon-active');
+            if(el != 'undefined' && el != null) {
+                const showActiveTheme = theme => {
+                const activeThemeIcon = document.querySelector('.theme-icon-active use')
+                const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+                const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
+
+                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                    element.classList.remove('active')
+                })
+
+                btnToActive.classList.add('active')
+                activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (storedTheme !== 'light' || storedTheme !== 'dark') {
+                    setTheme(getPreferredTheme())
+                }
+            })
+
+            showActiveTheme(getPreferredTheme())
+
+            document.querySelectorAll('[data-bs-theme-value]')
+                .forEach(toggle => {
+                    toggle.addEventListener('click', () => {
+                        const theme = toggle.getAttribute('data-bs-theme-value')
+                        localStorage.setItem('theme', theme)
+                        setTheme(theme)
+                        showActiveTheme(theme)
+                    })
+                })
+
+            }
+        })
+
+    </script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel='stylesheet'
+          href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Poppins:wght@400;500;700&amp;display=swap">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/tiny-slider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/glightbox.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/flatpickr.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/choices.min.css' %}">
+
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/style.css' %}">
+
+</head>
+
+<body class="has-navbar-mobile">
+
+
+<!-- **************** MAIN CONTENT START **************** -->
+
+{% block content %}
+
+{% endblock %}
+
+<!-- **************** MAIN CONTENT END **************** -->
+
+
+
+<!-- Back to top -->
+<div class="back-top"></div>
+
+<!-- Navbar mobile START -->
+<div class="navbar navbar-mobile">
+    <ul class="navbar-nav">
+        <!-- Nav item Home -->
+        <li class="nav-item">
+            <a class="nav-link active" href="index.html"><i class="bi bi-house-door fa-fw"></i>
+                <span class="mb-0 nav-text">Home</span>
+            </a>
+        </li>
+
+        <!-- Nav item My Trips -->
+        <li class="nav-item">
+            <a class="nav-link" href="account-bookings.html"><i class="bi bi-briefcase fa-fw"></i>
+                <span class="mb-0 nav-text">My Trips</span>
+            </a>
+        </li>
+
+        <!-- Nav item Offer -->
+        <li class="nav-item">
+            <a class="nav-link" href="offer-detail.html"><i class="bi bi-percent fa-fw"></i>
+                <span class="mb-0 nav-text">Offer</span>
+            </a>
+        </li>
+
+        <!-- Nav item Account -->
+        <li class="nav-item">
+            <a class="nav-link" href="account-profile.html"><i class="bi bi-person-circle fa-fw"></i>
+                <span class="mb-0 nav-text">Account</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- Navbar mobile END -->
+
+<!-- Bootstrap JS -->
+<script src="{% static 'website/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Vendors -->
+<script src="{% static 'website/js/tiny-slider.js' %}"></script>
+<script src="{% static 'website/js/glightbox.js' %}"></script>
+<script src="{% static 'website/js/flatpickr.min.js' %}"></script>
+<script src="{% static 'website/js/choices.min.js' %}"></script>
+
+<!-- ThemeFunctions -->
+<script src="{% static 'website/js/functions.js' %}"></script>
+
+
+</body>
+</html>
