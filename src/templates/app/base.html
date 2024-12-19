@@ -71,7 +71,7 @@
     </script>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{% static 'website/images/logo.png' %}">
+    <link rel="shortcut icon" href="favicon.ico">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -128,8 +128,8 @@
                 <ul class="navbar-nav navbar-nav-scroll nav-pills-primary-soft text-center ms-auto p-2 p-xl-0">
                     <!-- Nav item Главная -->
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/' %}active{% endif %}"
-                           href="{% url 'website:index' %}">Главная</a>
+                        <a class="nav-link {% if request.path == '/app/' %}active{% endif %}"
+                           href="#">Главная</a>
                     </li>
 
                     <!-- Nav item О нас -->
@@ -154,7 +154,7 @@
 
             <!-- Nav category menu END -->
 
-            {% if user.is_authenticated %}
+
             <!-- Profile and Notification START -->
             <ul class="nav flex-row align-items-center list-unstyled ms-xl-auto">
 
@@ -295,12 +295,6 @@
                 <!-- Profile dropdown END -->
             </ul>
             <!-- Profile and Notification START -->
-            {% else %}
-            <a href="{% url 'users:signin' %}" class="btn btn-sm btn-primary mb-0"
-               style="margin-left: 5px; background-color: #099642; border: #099642;"><i
-                    class="fa-solid fa-right-to-bracket me-sm-2"></i><span class="d-none d-sm-inline">Войти</span></a>
-
-            {% endif %}
 
 
         </div>
@@ -328,10 +322,9 @@ Footer START -->
             <div class="col-lg-3">
                 <!-- logo -->
                 <a href="index.html">
-                    <img class="h-40px" src="{% static 'website/images/logo.png' %}" alt="logo">
+                    <img class="h-40px" src="{% static 'website/images/logo-light.svg' %}" alt="logo">
                 </a>
-                <p class="my-3 text-body-secondary">Агентство недвижимости «АРБАТ РИЭЛ ЭСТЕЙТ (Arbat Real Estate)» - это
-                    новый стандарт качества услуг!</p>
+                <p class="my-3 text-body-secondary">Агентство недвижимости «АРБАТ РИЭЛ ЭСТЕЙТ (Arbat Real Estate)» - это новый стандарт качества услуг!</p>
                 <p class="mb-2"><a href="#" class="text-body-secondary text-primary-hover"><i
                         class="bi bi-telephone me-2"></i>+7 776 173 7373</a></p>
                 <p class="mb-0"><a href="#" class="text-body-secondary text-primary-hover"><i
@@ -342,50 +335,61 @@ Footer START -->
             <!-- Widget 2 START -->
             <div class="col-lg-8 ms-auto">
                 <div class="row g-4">
-                    <!-- Блок ссылок -->
+                    <!-- Link block -->
                     <div class="col-6 col-md-3">
-                        <h5 class="text-white mb-2 mb-md-4">Страницы</h5>
+                        <h5 class="text-white mb-2 mb-md-4">Page</h5>
                         <ul class="nav flex-column text-primary-hover">
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">О нас</a></li>
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Контакты</a></li>
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Новости и блог</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Наша команда</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">About us</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Contact us</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">News and Blog</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Meet a Team</a></li>
                         </ul>
                     </div>
 
-                    <!-- Блок ссылок -->
+                    <!-- Link block -->
                     <div class="col-6 col-md-3">
-                        <h5 class="text-white mb-2 mb-md-4">Ссылки</h5>
+                        <h5 class="text-white mb-2 mb-md-4">Link</h5>
                         <ul class="nav flex-column text-primary-hover">
                             <li class="nav-item"><a class="nav-link text-body-secondary"
                                                     href="{% url 'users:signin' %}">Войти</a></li>
                             <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Зарегистрироваться</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Политика
-                                конфиденциальности</a></li>
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Условия
-                                использования</a></li>
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Файлы cookie</a></li>
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Поддержка</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Privacy Policy</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Terms</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Cookie</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Support</a></li>
                         </ul>
                     </div>
 
-                    <!-- Блок ссылок -->
+                    <!-- Link block -->
                     <div class="col-6 col-md-3">
-                        <h5 class="text-white mb-2 mb-md-4">Местоположение</h5>
+                        <h5 class="text-white mb-2 mb-md-4">Global Site</h5>
                         <ul class="nav flex-column text-primary-hover">
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Индия</a></li>
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Калифорния</a></li>
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Индонезия</a></li>
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Канада</a></li>
-                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Малайзия</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">India</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">California</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Indonesia</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Canada</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#">Malaysia</a></li>
                         </ul>
                     </div>
 
+                    <!-- Link block -->
+                    <div class="col-6 col-md-3">
+                        <h5 class="text-white mb-2 mb-md-4">Booking</h5>
+                        <ul class="nav flex-column text-primary-hover">
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#"><i
+                                    class="fa-solid fa-hotel me-2"></i>Hotel</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#"><i
+                                    class="fa-solid fa-plane me-2"></i>Flight</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#"><i
+                                    class="fa-solid fa-globe-americas me-2"></i>Tour</a></li>
+                            <li class="nav-item"><a class="nav-link text-body-secondary" href="#"><i
+                                    class="fa-solid fa-car me-2"></i>Cabs</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-
             <!-- Widget 2 END -->
 
         </div><!-- Row END -->
@@ -445,7 +449,7 @@ Footer START -->
                 <ul class="list-inline mb-0 mt-3">
                     <li class="list-inline-item"><a class="btn btn-sm px-2 bg-facebook mb-0" href="#"><i
                             class="fab fa-fw fa-facebook-f"></i></a></li>
-                    <li class="list-inline-item"><a class="btn btn-sm shadow px-2 bg-instagram mb-0" href="#"><i
+                    <li class="list-inline-item"><a class="btn btn-sm shadow px-2 bg-instagram mb-0" href="https://www.instagram.com/arbat.apartments/"><i
                             class="fab fa-fw fa-instagram"></i></a></li>
                     <li class="list-inline-item"><a class="btn btn-sm shadow px-2 bg-twitter mb-0" href="#"><i
                             class="fab fa-fw fa-twitter"></i></a></li>
@@ -493,59 +497,32 @@ Footer END -->
     <ul class="navbar-nav">
         <!-- Nav item Home -->
         <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
-               href="{% url 'website:index' %}">
-                <i class="bi bi-house-door fa-fw"></i>
-                <span class="mb-0 nav-text">Главная</span>
+            <a class="nav-link active" href="index.html"><i class="bi bi-house-door fa-fw"></i>
+                <span class="mb-0 nav-text">Home</span>
             </a>
         </li>
 
-        <!-- Nav item Contacts -->
+        <!-- Nav item My Trips -->
         <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'contacts' %}active{% endif %}"
-               href="{% url 'website:contacts' %}">
-                <i class="bi bi-briefcase fa-fw"></i>
-                <span class="mb-0 nav-text">Контакты</span>
+            <a class="nav-link" href="account-bookings.html"><i class="bi bi-briefcase fa-fw"></i>
+                <span class="mb-0 nav-text">My Trips</span>
             </a>
         </li>
 
-        <!-- Nav item Calculator -->
+        <!-- Nav item Offer -->
         <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'calculator' %}active{% endif %}"
-               href="{% url 'website:calculator' %}">
-                <i class="bi bi-percent fa-fw"></i>
-                <span class="mb-0 nav-text">Калькулятор</span>
+            <a class="nav-link" href="offer-detail.html"><i class="bi bi-percent fa-fw"></i>
+                <span class="mb-0 nav-text">Offer</span>
             </a>
         </li>
 
         <!-- Nav item Account -->
-        {% if user.is_authenticated %}
         <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'index' and 'app' in request.path %}active{% endif %}"
-               href="{% url 'app:index' %}">
-                <i class="bi bi-person-circle fa-fw"></i>
-                <span class="mb-0 nav-text">Аккаунт</span>
+            <a class="nav-link" href="account-profile.html"><i class="bi bi-person-circle fa-fw"></i>
+                <span class="mb-0 nav-text">Account</span>
             </a>
         </li>
-        {% else %}
-        <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'signin' %}active{% endif %}"
-               href="{% url 'users:signin' %}">
-                <i class="bi bi-person-circle fa-fw"></i>
-                <span class="mb-0 nav-text">Аккаунт</span>
-            </a>
-        </li>
-        {% endif %}
     </ul>
-
-
-    <style>
-        @media (max-width: 575.98px) {
-            .navbar-mobile .nav-item .nav-link.active, .navbar-mobile .nav-item .nav-link:hover {
-                color: #099642;
-            }
-        }
-    </style>
 </div>
 <!-- Navbar mobile END -->
 

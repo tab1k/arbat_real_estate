@@ -17805,8 +17805,8 @@ a.badge:hover {
   border-radius: 0.5rem;
 }
 .nav-pills-primary-soft .nav-link.active, .nav-pills-primary-soft .nav-link:hover {
-  color: var(--bs-primary);
-  background-color: rgba(var(--bs-primary-rgb), 0.1);
+  color: white;
+  background-color: #099642;
 }
 
 .nav-pills-primary-soft.flex-column .nav-item {
