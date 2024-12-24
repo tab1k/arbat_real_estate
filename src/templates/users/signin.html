@@ -33,20 +33,12 @@
                                     <p class="mb-0">Впервые тут?<a style="color: #099642;" href="{% url 'users:signup' %}"> Зарегистрироваться! </a></p>
 
                                     <!-- Form START -->
-                                    <form class="mt-4 text-start">
-                                        <!-- Email -->
-                                        <div class="mb-3">
-                                            <label class="form-label">Номер телефона</label>
-                                            <input type="email" class="form-control">
-                                        </div>
-                                        <!-- Password -->
-                                        <div class="mb-3 position-relative">
-                                            <label class="form-label">Пароль</label>
-                                            <input class="form-control fakepassword" type="password" id="psw-input">
-                                            <span class="position-absolute top-50 end-0 translate-middle-y p-0 mt-3">
-											<i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>
-										</span>
-                                        </div>
+                                    <form class="mt-4 text-start" method="post" action="{% url 'users:signin' %}">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        {% if form.non_field_errors %}
+                                          <div>{{ form.non_field_errors }}</div>
+                                        {% endif %}
                                         <!-- Remember me -->
                                         <div class="mb-3 d-sm-flex justify-content-between">
                                             <div>
@@ -57,7 +49,7 @@
                                         </div>
                                         <!-- Button -->
                                         <div>
-                                            <a href="#" type="submit" class="btn btn-primary w-100 mb-0" style="background-color: #099642; border: #099642;">Войти</a>
+                                            <button type="submit" class="btn btn-primary w-100 mb-0" style="background-color: #099642; border: #099642;">Войти</button>
                                         </div>
 
 

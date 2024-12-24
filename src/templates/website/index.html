@@ -14,8 +14,8 @@
                 <!-- Content -->
                 <div class="col-lg-6 position-relative mb-4 mb-md-0">
                     <!-- Title -->
-                    <h1 class="mb-4 mt-md-5 display-5">Новый стандарт
-                        <span class="position-relative z-index-9">качества услуг!
+                    <h1 class="mb-4 mt-md-5 display-5">Предварительное решение от банка
+                        <span class="position-relative z-index-9">за 3 часа!
                             <!-- SVG START -->
 							<span class="position-absolute top-50 start-50 translate-middle z-index-n1 d-none d-md-block mt-4">
 								<svg width="390.5px" height="21.5px" viewBox="0 0 445.5 21.5">
@@ -32,28 +32,27 @@
 						</span>
                     </h1>
                     <!-- Info -->
-                    <p class="mb-4">We bring you not only a stay option, but an experience in your budget to enjoy the
-                        luxury.</p>
+                    <p class="mb-4">ТЕКСТА НЕТ! ТЕКСТА НЕТ! ТЕКСТА НЕТ! ТЕКСТА НЕТ!</p>
 
                     <!-- Buttons -->
                     <div class="hstack gap-4 flex-wrap align-items-center">
                         <!-- Button -->
                         <a href="#" class="btn btn-primary-soft mb-0" style="background-color: #099642; color: white;">Связаться  📞</a>
                         <!-- Story button -->
-                        <a data-glightbox="" data-gallery="office-tour" href="https://www.youtube.com/embed/tXHviS-4ygo"
-                           class="d-block">
-                            <!-- Avatar -->
-                            <div class="avatar avatar-md z-index-1 position-relative me-2">
-                                <img class="avatar-img rounded-circle" src="{% static 'website/images/12.jpg' %}" alt="avatar">
-                                <!-- Video button -->
-                                <div class="btn btn-xs btn-round btn-white shadow-sm position-absolute top-50 start-50 translate-middle z-index-9 mb-0">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="align-middle d-inline-block">
-                                <h6 class="fw-normal small mb-0">Посмотрите нашу историю</h6>
-                            </div>
-                        </a>
+<!--                        <a data-glightbox="" data-gallery="office-tour" href="https://www.youtube.com/embed/tXHviS-4ygo"-->
+<!--                           class="d-block">-->
+<!--                            &lt;!&ndash; Avatar &ndash;&gt;-->
+<!--                            <div class="avatar avatar-md z-index-1 position-relative me-2">-->
+<!--                                <img class="avatar-img rounded-circle" src="{% static 'website/images/12.jpg' %}" alt="avatar">-->
+<!--                                &lt;!&ndash; Video button &ndash;&gt;-->
+<!--                                <div class="btn btn-xs btn-round btn-white shadow-sm position-absolute top-50 start-50 translate-middle z-index-9 mb-0">-->
+<!--                                    <i class="fas fa-play"></i>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="align-middle d-inline-block">-->
+<!--                                <h6 class="fw-normal small mb-0">Посмотрите нашу историю</h6>-->
+<!--                            </div>-->
+<!--                        </a>-->
                     </div>
                 </div>
 
@@ -104,7 +103,7 @@
                             <!-- Title -->
                             <i class="bi bi-headset text-danger fs-3"></i>
                             <h5 class="text-dark mb-1">24 / 7</h5>
-                            <h6 class="text-dark fw-light small mb-0">Guide Supports</h6>
+                            <h6 class="text-dark fw-light small mb-0">Поддержка</h6>
                         </div>
                     </div>
 
@@ -260,89 +259,34 @@
                 <div class="tiny-slider-inner" data-autoplay="true" data-arrow="true" data-edge="2" data-dots="false"
                      data-items-xl="3" data-items-lg="2" data-items-md="1">
                     <!-- Slider item -->
+                    {% for i in creeping_line %}
                     <div>
                         <div class="card border rounded-3 overflow-hidden">
                             <div class="row g-0 align-items-center">
                                 <!-- Image -->
                                 <div class="col-sm-6">
-                                    <img src="{% static 'website/images/01_1.jpg' %}" class="card-img rounded-0" alt="">
+                                    <img src="{{ i.image.url }}" class="card-img rounded-0" alt="">
                                 </div>
 
                                 <!-- Title and content -->
                                 <div class="col-sm-6">
                                     <div class="card-body px-3">
-                                        <h6 class="card-title"><a href="offer-detail.html" class="stretched-link">Daily
-                                            50 Lucky Winners get a Free Stay</a></h6>
-                                        <p class="mb-0">Valid till: 15 Nov</p>
+                                        <h6 class="card-title"><a href="offer-detail.html" class="stretched-link">{{ i.title }}</a></h6>
+                                        <p class="mb-0">{{ i.text }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Slider item -->
-                    <div>
-                        <div class="card border rounded-3 overflow-hidden">
-                            <div class="row g-0 align-items-center">
-                                <!-- Image -->
-                                <div class="col-sm-6">
-                                    <img src="{% static 'website/images/04.jpg' %}" class="card-img rounded-0" alt="">
-                                </div>
-
-                                <!-- Title and content -->
-                                <div class="col-sm-6">
-                                    <div class="card-body px-3">
-                                        <h6 class="card-title"><a href="offer-detail.html" class="stretched-link">Up to
-                                            60% OFF</a></h6>
-                                        <p class="mb-0">On Hotel Bookings Online</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slider item -->
-                    <div>
-                        <div class="card border rounded-3 overflow-hidden">
-                            <div class="row g-0 align-items-center">
-                                <!-- Image -->
-                                <div class="col-sm-6">
-                                    <img src="{% static 'website/images/03.jpg' %}" class="card-img rounded-0" alt="">
-                                </div>
-
-                                <!-- Title and content -->
-                                <div class="col-sm-6">
-                                    <div class="card-body px-3">
-                                        <h6 class="card-title"><a href="offer-detail.html" class="stretched-link">Book
-                                            &amp; Enjoy</a></h6>
-                                        <p class="mb-0">20% Off on the best available room rate</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slider item -->
-                    <div>
-                        <div class="card border rounded-3 overflow-hidden">
-                            <div class="row g-0 align-items-center">
-                                <!-- Image -->
-                                <div class="col-sm-6">
-                                    <img src="{% static 'website/images/02_1.jpg' %}" class="card-img rounded-0" alt="">
-                                </div>
-
-                                <!-- Title and content -->
-                                <div class="col-sm-6">
-                                    <div class="card-body px-3">
-                                        <h6 class="card-title"><a href="offer-detail.html" class="stretched-link">Hot
-                                            Summer Nights</a></h6>
-                                        <p class="mb-0">Up to 3 nights free!</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% empty %}
+                    <p>No creeping lines available.</p>
+                    {% endfor %}
                 </div>
+                <style>
+                    img.card-img.rounded-0 {
+                        height: 145px;
+                    }
+                </style>
             </div>
             <!-- Slider END -->
         </div>
@@ -698,23 +642,23 @@
             <!-- Title -->
             <div class="row mb-4">
                 <div class="col-12 text-center">
-                    <h2 class="mb-0"> Лучшие апартаменты 🏡</h2>
+                    <h2 class="mb-0">Эксклюзивные предложения 🏡</h2>
                 </div>
             </div>
 
             <div class="row g-4">
-                <!-- Hotel item -->
+                {% for i in exclusive_offer %}
                 <div class="col-sm-6 col-xl-3">
                     <!-- Card START -->
                     <div class="card card-img-scale overflow-hidden bg-transparent">
                         <!-- Image and overlay -->
                         <div class="card-img-scale-wrapper rounded-3">
                             <!-- Image -->
-                            <img src="{% static 'website/images/01_3.jpg' %}" class="card-img" alt="hotel image">
+                            <img src="{{ i.image.url }}" class="card-img" alt="hotel image">
                             <!-- Badge -->
                             <div class="position-absolute bottom-0 start-0 p-3">
                                 <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
-                                        class="bi bi-geo-alt me-2"></i>New York
+                                        class="bi bi-geo-alt me-2"></i>{{ i.get_city_display }}
                                 </div>
                             </div>
                         </div>
@@ -722,110 +666,24 @@
                         <!-- Card body -->
                         <div class="card-body px-2">
                             <!-- Title -->
-                            <h5 class="card-title"><a href="hotel-detail.html" class="stretched-link">Baga Comfort</a>
+                            <h5 class="card-title"><a href="hotel-detail.html" class="stretched-link">{{ i.name }}</a>
                             </h5>
-                            <!-- Price and rating -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="text-success mb-0">$455 <small class="fw-light">/starting at</small></h6>
-                                <h6 class="mb-0">4.5<i class="fa-solid fa-star text-warning ms-1"></i></h6>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card END -->
-                </div>
-
-                <!-- Hotel item -->
-                <div class="col-sm-6 col-xl-3">
-                    <!-- Card START -->
-                    <div class="card card-img-scale overflow-hidden bg-transparent">
-                        <!-- Image and overlay -->
-                        <div class="card-img-scale-wrapper rounded-3">
-                            <!-- Image -->
-                            <img src="{% static 'website/images/02_2.jpg' %}" class="card-img" alt="hotel image">
-                            <!-- Badge -->
-                            <div class="position-absolute bottom-0 start-0 p-3">
-                                <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
-                                        class="bi bi-geo-alt me-2"></i>California
+                            <div>
+                                <h6> <small class="fw-light">Район : {{ i.side }}</small></h6>
+                                <h6> <small class="fw-light">Площадь : {{ i.area }}</small></h6>
+                                <h6> <small class="fw-light">Комнат : {{ i.rooms }}</small></h6>
+                                <!-- Price and rating -->
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="text-success mb-0">{{ i.price }} тг. </h6>
+                                    <h6 class="mb-0">{{ i.mark }} <i class="fa-solid fa-star text-warning ms-1"></i></h6>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Card body -->
-                        <div class="card-body px-2">
-                            <!-- Title -->
-                            <h5 class="card-title"><a href="hotel-detail.html" class="stretched-link">New Apollo
-                                Hotel</a></h5>
-                            <!-- Price and rating -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="text-success mb-0">$585 <small class="fw-light">/starting at</small></h6>
-                                <h6 class="mb-0">4.8<i class="fa-solid fa-star text-warning ms-1"></i></h6>
-                            </div>
-                        </div>
                     </div>
                     <!-- Card END -->
                 </div>
-
-                <!-- Hotel item -->
-                <div class="col-sm-6 col-xl-3">
-                    <!-- Card START -->
-                    <div class="card card-img-scale overflow-hidden bg-transparent">
-                        <!-- Image and overlay -->
-                        <div class="card-img-scale-wrapper rounded-3">
-                            <!-- Image -->
-                            <img src="{% static 'website/images/03_2.jpg' %}" class="card-img" alt="hotel image">
-                            <!-- Badge -->
-                            <div class="position-absolute bottom-0 start-0 p-3">
-                                <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
-                                        class="bi bi-geo-alt me-2"></i>Los Angeles
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card body -->
-                        <div class="card-body px-2">
-                            <!-- Title -->
-                            <h5 class="card-title"><a href="hotel-detail.html" class="stretched-link">New Age Hotel</a>
-                            </h5>
-                            <!-- Price and rating -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="text-success mb-0">$385 <small class="fw-light">/starting at</small></h6>
-                                <h6 class="mb-0">4.6<i class="fa-solid fa-star text-warning ms-1"></i></h6>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card END -->
-                </div>
-
-                <!-- Hotel item -->
-                <div class="col-sm-6 col-xl-3">
-                    <!-- Card START -->
-                    <div class="card card-img-scale overflow-hidden bg-transparent">
-                        <!-- Image and overlay -->
-                        <div class="card-img-scale-wrapper rounded-3">
-                            <!-- Image -->
-                            <img src="{% static 'website/images/04_2.jpg' %}" class="card-img" alt="hotel image">
-                            <!-- Badge -->
-                            <div class="position-absolute bottom-0 start-0 p-3">
-                                <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
-                                        class="bi bi-geo-alt me-2"></i>Chicago
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card body -->
-                        <div class="card-body px-2">
-                            <!-- Title -->
-                            <h5 class="card-title"><a href="hotel-detail.html" class="stretched-link">Helios Beach
-                                Resort</a></h5>
-                            <!-- Price and rating -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="text-success mb-0">$665 <small class="fw-light">/starting at</small></h6>
-                                <h6 class="mb-0">4.8<i class="fa-solid fa-star text-warning ms-1"></i></h6>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card END -->
-                </div>
+                {% endfor %}
             </div> <!-- Row END -->
         </div>
     </section>
@@ -866,125 +724,6 @@
     </section>
     <!-- =======================
     Client END -->
-
-    <!-- =======================
-    Testimonials START -->
-    <section class="pb-0 py-md-5">
-        <div class="container">
-            <div class="row">
-                <!-- Slider START -->
-                <div class="col-lg-11 mx-auto">
-                    <div class="tiny-slider arrow-round arrow-border arrow-hover">
-                        <div class="tiny-slider-inner" data-edge="2" data-items="1">
-
-                            <!-- Slide item START -->
-                            <div class="px-4 px-md-5">
-                                <div class="row justify-content-between align-items-center">
-
-                                    <div class="col-md-6 col-lg-5 position-relative">
-                                        <!-- Element -->
-                                        <div class="position-absolute top-0 start-0 translate-middle z-index-9 mt-7 ms-4">
-                                            <img src="images/02_1.svg" class="h-60px bg-orange rounded p-2" alt="">
-                                        </div>
-
-                                        <!-- Svg decoration -->
-                                        <figure class="position-absolute bottom-0 end-0 d-none d-sm-block mb-n5 me-n5">
-                                            <svg width="326px" height="335px" viewBox="0 0 326 335">
-                                                <path class="fill-primary opacity-1" d="M7.3,0C3.3,0,0,3.3,0,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.6,3.3,11.3,0,7.3,0z
-												M59.2,0.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.5,4,63.2,0.7,59.2,0.7L59.2,0.7z	M111.1,1.5c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C118.4,4.7,115.1,1.5,111.1,1.5 C111.1,1.5,111.1,1.5,111.1,1.5L111.1,1.5z M163,2.2c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0 C170.3,5.5,167,2.2,163,2.2C163,2.2,163,2.2,163,2.2L163,2.2z M214.9,2.9c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3 c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C222.2,6.2,218.9,2.9,214.9,2.9C214.9,2.9,214.9,2.9,214.9,2.9L214.9,2.9z M266.8,3.7 c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.1,6.9,270.8,3.7,266.8,3.7C266.8,3.7,266.8,3.7,266.8,3.7L266.8,3.7z M318.7,4.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C326,7.7,322.7,4.4,318.7,4.4C318.7,4.4,318.7,4.4,318.7,4.4L318.7,4.4z M7.3,52.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.6,55.9,11.4,52.7,7.3,52.7C7.3,52.7,7.3,52.7,7.3,52.7L7.3,52.7z M59.2,53.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.5,56.7,63.3,53.4,59.2,53.4C59.2,53.4,59.2,53.4,59.2,53.4L59.2,53.4z M111.1,54.1c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C118.4,57.4,115.2,54.1,111.1,54.1C111.1,54.1,111.1,54.1,111.1,54.1L111.1,54.1z M163,54.9c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C170.3,58.1,167.1,54.9,163,54.9C163,54.9,163,54.9,163,54.9L163,54.9zM214.9,55.6c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C222.2,58.9,219,55.6,214.9,55.6C214.9,55.6,214.9,55.6,214.9,55.6L214.9,55.6z M266.8,56.3c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.1,59.6,270.9,56.3,266.8,56.3C266.8,56.3,266.8,56.3,266.8,56.3L266.8,56.3z M318.7,57c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C326,60.3,322.8,57.1,318.7,57C318.7,57,318.7,57,318.7,57L318.7,57zM7.3,105.3c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.7,108.6,11.4,105.3,7.3,105.3C7.3,105.3,7.3,105.3,7.3,105.3L7.3,105.3z M59.2,106c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.6,109.3,63.3,106.1,59.2,106C59.2,106,59.2,106,59.2,106L59.2,106z M111.1,106.8c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C118.5,110.1,115.2,106.8,111.1,106.8C111.1,106.8,111.1,106.8,111.1,106.8L111.1,106.8zM163,107.5c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C170.4,110.8,167.1,107.5,163,107.5C163,107.5,163,107.5,163,107.5L163,107.5z M214.9,108.2c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C222.3,111.5,219,108.3,214.9,108.2C214.9,108.2,214.9,108.3,214.9,108.2L214.9,108.2z M266.8,109c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.2,112.3,270.9,109,266.8,109C266.8,109,266.8,109,266.8,109L266.8,109zM318.7,109.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C326.1,113,322.8,109.7,318.7,109.7C318.7,109.7,318.7,109.7,318.7,109.7L318.7,109.7z M7.3,158c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.6,161.3,11.3,158,7.3,158z M59.2,158.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.5,162,63.2,158.7,59.2,158.7C59.2,158.7,59.2,158.7,59.2,158.7L59.2,158.7z M111.1,159.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C118.4,162.7,115.1,159.5,111.1,159.4C111.1,159.4,111.1,159.4,111.1,159.4L111.1,159.4z M163,160.2c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C170.3,163.5,167,160.2,163,160.2C163,160.2,163,160.2,163,160.2L163,160.2z M214.9,160.9c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C222.2,164.2,218.9,160.9,214.9,160.9C214.9,160.9,214.9,160.9,214.9,160.9L214.9,160.9zM266.8,161.6c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.1,164.9,270.8,161.6,266.8,161.6C266.8,161.6,266.8,161.6,266.8,161.6L266.8,161.6z M318.7,162.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C326,165.6,322.7,162.4,318.7,162.4C318.7,162.4,318.7,162.4,318.7,162.4L318.7,162.4z M7.3,210.6c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.6,213.9,11.4,210.7,7.3,210.6C7.3,210.6,7.3,210.6,7.3,210.6L7.3,210.6zM59.2,211.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.5,214.7,63.3,211.4,59.2,211.4C59.2,211.4,59.2,211.4,59.2,211.4L59.2,211.4z M111.1,212.1c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C118.4,215.4,115.2,212.1,111.1,212.1C111.1,212.1,111.1,212.1,111.1,212.1L111.1,212.1z M163,212.8c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C170.3,216.1,167.1,212.8,163,212.8C163,212.8,163,212.8,163,212.8L163,212.8z M214.9,213.6c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C222.2,216.8,219,213.6,214.9,213.6C214.9,213.6,214.9,213.6,214.9,213.6L214.9,213.6z M266.8,214.3c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.1,217.6,270.9,214.3,266.8,214.3C266.8,214.3,266.8,214.3,266.8,214.3L266.8,214.3z M318.7,215c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C326,218.3,322.8,215,318.7,215C318.7,215,318.7,215,318.7,215L318.7,215z M7.3,263.3c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.7,266.6,11.4,263.3,7.3,263.3C7.3,263.3,7.3,263.3,7.3,263.3L7.3,263.3z M59.2,264c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.6,267.3,63.3,264,59.2,264C59.2,264,59.2,264,59.2,264L59.2,264z M111.1,264.8c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C118.5,268,115.2,264.8,111.1,264.8C111.1,264.8,111.1,264.8,111.1,264.8L111.1,264.8z M163,265.5c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C170.4,268.8,167.1,265.5,163,265.5C163,265.5,163,265.5,163,265.5L163,265.5z M214.9,266.2c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C222.3,269.5,219,266.2,214.9,266.2C214.9,266.2,214.9,266.2,214.9,266.2L214.9,266.2z M266.8,267c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.2,270.2,270.9,267,266.8,267C266.8,267,266.8,267,266.8,267L266.8,267z M318.7,267.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C326.1,271,322.8,267.7,318.7,267.7C318.7,267.7,318.7,267.7,318.7,267.7L318.7,267.7z M7.4,316c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.7,319.2,11.4,316,7.4,316C7.3,316,7.3,316,7.4,316L7.4,316z M59.3,316.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.6,320,63.3,316.7,59.3,316.7C59.2,316.7,59.2,316.7,59.3,316.7L59.3,316.7z M111.2,317.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C118.5,320.7,115.2,317.4,111.2,317.4C111.1,317.4,111.1,317.4,111.2,317.4L111.2,317.4z M163.1,318.2c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C170.4,321.4,167.1,318.2,163.1,318.2C163,318.2,163,318.2,163.1,318.2L163.1,318.2z M215,318.9c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C222.3,322.2,219,318.9,215,318.9C214.9,318.9,214.9,318.9,215,318.9L215,318.9z M266.9,319.6c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.2,322.9,270.9,319.6,266.9,319.6C266.8,319.6,266.8,319.6,266.9,319.6L266.9,319.6z M318.8,320.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C326.1,323.6,322.8,320.4,318.8,320.4C318.7,320.4,318.7,320.4,318.8,320.4L318.8,320.4z"></path>
-                                            </svg>
-                                        </figure>
-
-                                        <!-- Image -->
-                                        <img src="website/images/photo1.jpg" class="rounded-3 position-relative" alt="">
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-6">
-                                        <!-- Quote -->
-                                        <span class="display-3 mb-0 text-primary"><i class="bi bi-quote"></i></span>
-                                        <!-- Content -->
-                                        <h5 class="fw-light">Moonlight newspaper up its enjoyment agreeable depending.
-                                            Timed voice share led him to widen noisy young. At weddings believed in
-                                            laughing</h5>
-                                        <!-- Rating -->
-                                        <ul class="list-inline small mb-2">
-                                            <li class="list-inline-item me-0"><i
-                                                    class="fa-solid fa-star text-warning"></i></li>
-                                            <li class="list-inline-item me-0"><i
-                                                    class="fa-solid fa-star text-warning"></i></li>
-                                            <li class="list-inline-item me-0"><i
-                                                    class="fa-solid fa-star text-warning"></i></li>
-                                            <li class="list-inline-item me-0"><i
-                                                    class="fa-solid fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i
-                                                    class="fa-solid fa-star-half-alt text-warning"></i></li>
-                                        </ul>
-                                        <!-- Title -->
-                                        <h6 class="mb-0">Billy Vasquez</h6>
-                                        <span>Ceo of Apple</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Slide item END -->
-
-                            <!-- Slide item START -->
-                            <div class="px-4 px-md-5">
-                                <div class="row justify-content-between align-items-center">
-
-                                    <div class="col-md-6 col-lg-5 position-relative">
-                                        <!-- Element -->
-                                        <div class="position-absolute top-0 start-0 translate-middle mt-7 ms-4 z-index-9">
-                                            <img src="images/03_1.svg" class="h-60px bg-orange p-2 rounded" alt="">
-                                        </div>
-
-                                        <!-- Svg decoration -->
-                                        <figure class="position-absolute bottom-0 end-0 mb-n5 me-n5 d-none d-sm-block">
-                                            <svg width="326px" height="335px" viewBox="0 0 326 335">
-                                                <path class="fill-primary opacity-1" d="M7.3,0C3.3,0,0,3.3,0,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.6,3.3,11.3,0,7.3,0z M59.2,0.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.5,4,63.2,0.7,59.2,0.7L59.2,0.7z M111.1,1.5c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C118.4,4.7,115.1,1.5,111.1,1.5 C111.1,1.5,111.1,1.5,111.1,1.5L111.1,1.5z M163,2.2c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0 C170.3,5.5,167,2.2,163,2.2C163,2.2,163,2.2,163,2.2L163,2.2z M214.9,2.9c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3 c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C222.2,6.2,218.9,2.9,214.9,2.9C214.9,2.9,214.9,2.9,214.9,2.9L214.9,2.9z M266.8,3.7 c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.1,6.9,270.8,3.7,266.8,3.7 C266.8,3.7,266.8,3.7,266.8,3.7L266.8,3.7z M318.7,4.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0 C326,7.7,322.7,4.4,318.7,4.4C318.7,4.4,318.7,4.4,318.7,4.4L318.7,4.4z M7.3,52.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3 c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.6,55.9,11.4,52.7,7.3,52.7C7.3,52.7,7.3,52.7,7.3,52.7L7.3,52.7z M59.2,53.4 c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.5,56.7,63.3,53.4,59.2,53.4 C59.2,53.4,59.2,53.4,59.2,53.4L59.2,53.4z M111.1,54.1c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0 C118.4,57.4,115.2,54.1,111.1,54.1C111.1,54.1,111.1,54.1,111.1,54.1L111.1,54.1z M163,54.9c-4,0-7.3,3.3-7.3,7.3 c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C170.3,58.1,167.1,54.9,163,54.9C163,54.9,163,54.9,163,54.9L163,54.9z M214.9,55.6c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C222.2,58.9,219,55.6,214.9,55.6 C214.9,55.6,214.9,55.6,214.9,55.6L214.9,55.6z M266.8,56.3c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3 c0,0,0,0,0,0C274.1,59.6,270.9,56.3,266.8,56.3C266.8,56.3,266.8,56.3,266.8,56.3L266.8,56.3z M318.7,57c-4,0-7.3,3.3-7.3,7.3 c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C326,60.3,322.8,57.1,318.7,57C318.7,57,318.7,57,318.7,57L318.7,57z M7.3,105.3c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.7,108.6,11.4,105.3,7.3,105.3 C7.3,105.3,7.3,105.3,7.3,105.3L7.3,105.3z M59.2,106c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0 C66.6,109.3,63.3,106.1,59.2,106C59.2,106,59.2,106,59.2,106L59.2,106z M111.1,106.8c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3 c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C118.5,110.1,115.2,106.8,111.1,106.8C111.1,106.8,111.1,106.8,111.1,106.8L111.1,106.8z M163,107.5c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C170.4,110.8,167.1,107.5,163,107.5 C163,107.5,163,107.5,163,107.5L163,107.5z M214.9,108.2c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0 C222.3,111.5,219,108.3,214.9,108.2C214.9,108.2,214.9,108.3,214.9,108.2L214.9,108.2z M266.8,109c-4,0-7.3,3.3-7.3,7.3 c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.2,112.3,270.9,109,266.8,109C266.8,109,266.8,109,266.8,109L266.8,109z M318.7,109.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C326.1,113,322.8,109.7,318.7,109.7 C318.7,109.7,318.7,109.7,318.7,109.7L318.7,109.7z M7.3,158c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3 c0,0,0,0,0,0C14.6,161.3,11.3,158,7.3,158z M59.2,158.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0 C66.5,162,63.2,158.7,59.2,158.7C59.2,158.7,59.2,158.7,59.2,158.7L59.2,158.7z M111.1,159.4c-4,0-7.3,3.3-7.3,7.3 c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C118.4,162.7,115.1,159.5,111.1,159.4C111.1,159.4,111.1,159.4,111.1,159.4 L111.1,159.4z M163,160.2c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0 C170.3,163.5,167,160.2,163,160.2C163,160.2,163,160.2,163,160.2L163,160.2z M214.9,160.9c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3 c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C222.2,164.2,218.9,160.9,214.9,160.9C214.9,160.9,214.9,160.9,214.9,160.9L214.9,160.9z M266.8,161.6c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.1,164.9,270.8,161.6,266.8,161.6 C266.8,161.6,266.8,161.6,266.8,161.6L266.8,161.6z M318.7,162.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3 c0,0,0,0,0,0C326,165.6,322.7,162.4,318.7,162.4C318.7,162.4,318.7,162.4,318.7,162.4L318.7,162.4z M7.3,210.6c-4,0-7.3,3.3-7.3,7.3 c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.6,213.9,11.4,210.7,7.3,210.6C7.3,210.6,7.3,210.6,7.3,210.6L7.3,210.6z M59.2,211.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.5,214.7,63.3,211.4,59.2,211.4 C59.2,211.4,59.2,211.4,59.2,211.4L59.2,211.4z M111.1,212.1c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3 c0,0,0,0,0,0C118.4,215.4,115.2,212.1,111.1,212.1C111.1,212.1,111.1,212.1,111.1,212.1L111.1,212.1z M163,212.8 c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C170.3,216.1,167.1,212.8,163,212.8 C163,212.8,163,212.8,163,212.8L163,212.8z M214.9,213.6c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0 C222.2,216.8,219,213.6,214.9,213.6C214.9,213.6,214.9,213.6,214.9,213.6L214.9,213.6z M266.8,214.3c-4,0-7.3,3.3-7.3,7.3 c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.1,217.6,270.9,214.3,266.8,214.3C266.8,214.3,266.8,214.3,266.8,214.3 L266.8,214.3z M318.7,215c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C326,218.3,322.8,215,318.7,215 C318.7,215,318.7,215,318.7,215L318.7,215z M7.3,263.3c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0 C14.7,266.6,11.4,263.3,7.3,263.3C7.3,263.3,7.3,263.3,7.3,263.3L7.3,263.3z M59.2,264c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3 c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.6,267.3,63.3,264,59.2,264C59.2,264,59.2,264,59.2,264L59.2,264z M111.1,264.8 c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C118.5,268,115.2,264.8,111.1,264.8 C111.1,264.8,111.1,264.8,111.1,264.8L111.1,264.8z M163,265.5c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3 c0,0,0,0,0,0C170.4,268.8,167.1,265.5,163,265.5C163,265.5,163,265.5,163,265.5L163,265.5z M214.9,266.2c-4,0-7.3,3.3-7.3,7.3 c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C222.3,269.5,219,266.2,214.9,266.2C214.9,266.2,214.9,266.2,214.9,266.2 L214.9,266.2z M266.8,267c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0 C274.2,270.2,270.9,267,266.8,267C266.8,267,266.8,267,266.8,267L266.8,267z M318.7,267.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3 c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C326.1,271,322.8,267.7,318.7,267.7C318.7,267.7,318.7,267.7,318.7,267.7L318.7,267.7z M7.4,316 c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C14.7,319.2,11.4,316,7.4,316C7.3,316,7.3,316,7.4,316 L7.4,316z M59.3,316.7c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C66.6,320,63.3,316.7,59.3,316.7 C59.2,316.7,59.2,316.7,59.3,316.7L59.3,316.7z M111.2,317.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3 c0,0,0,0,0,0C118.5,320.7,115.2,317.4,111.2,317.4C111.1,317.4,111.1,317.4,111.2,317.4L111.2,317.4z M163.1,318.2 c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C170.4,321.4,167.1,318.2,163.1,318.2 C163,318.2,163,318.2,163.1,318.2L163.1,318.2z M215,318.9c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3 c0,0,0,0,0,0C222.3,322.2,219,318.9,215,318.9C214.9,318.9,214.9,318.9,215,318.9L215,318.9z M266.9,319.6c-4,0-7.3,3.3-7.3,7.3 c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0C274.2,322.9,270.9,319.6,266.9,319.6C266.8,319.6,266.8,319.6,266.9,319.6 L266.9,319.6z M318.8,320.4c-4,0-7.3,3.3-7.3,7.3c0,4,3.3,7.3,7.3,7.3c4,0,7.3-3.3,7.3-7.3c0,0,0,0,0,0
-												C326.1,323.6,322.8,320.4,318.8,320.4C318.7,320.4,318.7,320.4,318.8,320.4L318.8,320.4z"></path>
-                                            </svg>
-                                        </figure>
-
-                                        <!-- Image -->
-                                        <img src="website/images/photo1.jpg" class="rounded-3 position-relative" alt="">
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-6">
-                                        <!-- Quote -->
-                                        <span class="display-3 mb-0 text-primary"><i class="bi bi-quote"></i></span>
-                                        <!-- Content -->
-                                        <h5 class="fw-light">Passage its ten led hearted removal cordial. Preference any
-                                            astonished unreserved Mrs. understood the Preference unreserved.</h5>
-                                        <!-- Rating -->
-                                        <ul class="list-inline small mb-2">
-                                            <li class="list-inline-item me-0"><i
-                                                    class="fa-solid fa-star text-warning"></i></li>
-                                            <li class="list-inline-item me-0"><i
-                                                    class="fa-solid fa-star text-warning"></i></li>
-                                            <li class="list-inline-item me-0"><i
-                                                    class="fa-solid fa-star text-warning"></i></li>
-                                            <li class="list-inline-item me-0"><i
-                                                    class="fa-solid fa-star text-warning"></i></li>
-                                            <li class="list-inline-item"><i class="fa-solid fa-star text-warning"></i>
-                                            </li>
-                                        </ul>
-                                        <!-- Title -->
-                                        <h6 class="mb-0">Carolyn Ortiz</h6>
-                                        <span>Ceo of Google</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Slide item END -->
-
-                        </div>
-                    </div>
-                </div>
-                <!-- Slider END -->
-            </div>
-        </div>
-    </section>
-    <!-- =======================
-    Testimonials END -->
 
 
     <!-- =======================

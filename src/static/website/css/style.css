@@ -20973,7 +20973,7 @@ a.text-primary-hover, button.text-primary-hover {
   transition: all 0.3s ease-in-out;
 }
 a.text-primary-hover:hover, button.text-primary-hover:hover {
-  color: var(--bs-primary) !important;
+  color: white;
 }
 
 .text-primary-hover li {

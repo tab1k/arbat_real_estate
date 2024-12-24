@@ -134,12 +134,70 @@
 
                             <!-- Information -->
                             <div class="col-lg-6 d-flex align-items-center order-2 order-lg-1">
-                                <div class="p-3 p-lg-5">
-                                    <img src="{% static 'website/images/signin.svg' %}" alt="">
+                                <div class="p-3 p-lg-5 w-100">
+                                    <h5 class="mb-4">Рассчитанный результат</h5>
+
+                                    <!-- Ставка в процентах -->
+                                    <div class="mb-3">
+                                        <label for="interest-rate" class="form-label">Ставка в процентах ГЭСВ</label>
+                                        <input type="text" id="interest-rate" class="form-control" value="7.5%"
+                                               disabled>
+                                    </div>
+
+                                    <!-- Сумма кредита -->
+                                    <div class="mb-3">
+                                        <label for="loan-amount" class="form-label">Сумма кредита</label>
+                                        <input type="text" id="loan-amount" class="form-control" value="1 000 000 KZT"
+                                               disabled>
+                                    </div>
+
+                                    <!-- Ежемесячный платеж -->
+                                    <div class="mb-3">
+                                        <label for="monthly-payment" class="form-label">Ежемесячный платеж</label>
+                                        <input type="text" id="monthly-payment" class="form-control" value="25 000 KZT"
+                                               disabled>
+                                    </div>
+
+                                    <!-- Способы погашения -->
+                                    <div class="mb-4">
+                                        <label class="form-label">Способы погашения</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="repayment-method"
+                                                   id="annuity" checked>
+                                            <label class="form-check-label" for="annuity">
+                                                Аннуитетный платеж
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="repayment-method"
+                                                   id="differentiated">
+                                            <label class="form-check-label" for="differentiated">
+                                                Дифференцированный платеж
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Кнопка подачи заявки -->
+                                    <div class="text-center">
+                                        <button class="btn"
+                                                style="background-color: #099642; color: white; width: 100%;">Подать
+                                            заявку
+                                        </button>
+                                    </div>
                                 </div>
-                                <!-- Divider -->
-                                <div class="vr opacity-1 d-none d-lg-block"></div>
                             </div>
+                            <style>
+                                .form-control {
+                                    border-color: #099642;
+                                }
+
+                                .form-check-input:checked {
+                                    background-color: #099642;
+                                    border-color: #099642;
+                                }
+
+                            </style>
+
                         </div>
                     </div>
                 </div>
@@ -172,11 +230,11 @@
                             </figure>
 
                             <!-- Title -->
-                            <h2 class="text-white">Get an Extra 45% Discount Code</h2>
+                            <h2 class="text-white">Получи еще больший результат!</h2>
                             <!-- Content -->
                             <div class="d-flex justify-content-between flex-wrap">
-                                <h4 class="fw-light text-white mb-0">On all restaurant deals</h4>
-                                <a href="#" class="text-warning fs-4 stretched-link">Use Code: BOOK56</a>
+                                <h4 class="fw-light text-white mb-0">Связаться</h4>
+                                <a href="#" class="text-warning fs-4 stretched-link">+7 (707) 777 28 17</a>
                             </div>
                         </div>
                     </div>
