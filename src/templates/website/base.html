@@ -219,7 +219,7 @@
                     <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button"
                        data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img class="avatar-img rounded-2" src="{% static 'website/images/01.jpg' %}" alt="avatar">
+                        <img class="avatar-img rounded-2" src="{% if user.photo %} {{ user.photo.url }} {% else %} {% static 'website/images/user.png' %}{% endif %}" alt="avatar">
                     </a>
 
                     <ul class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3"
@@ -230,7 +230,7 @@
                                 <!-- Avatar -->
                                 <div class="avatar me-3">
                                     <img class="avatar-img rounded-circle shadow"
-                                         src="{% static 'website/images/01.jpg' %}" alt="avatar">
+                                         src="{% if user.photo %} {{ user.photo.url }} {% else %} {% static 'website/images/user.png' %}{% endif %}" alt="avatar">
                                 </div>
                                 <div>
                                     <a class="h6 mt-2 mt-sm-0" href="#">{{ user.first_name }} {{ user.last_name }}</a>

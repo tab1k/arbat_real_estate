@@ -82,15 +82,6 @@ class UserSignUpForm(UserCreationForm):
         }),
         required=True
     )
-    email = forms.EmailField(
-        max_length=254,
-        label='Email адрес',
-        widget=forms.EmailInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Email адрес'
-        }),
-        required=True
-    )
 
     password1 = forms.CharField(
         label='Пароль',

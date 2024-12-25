@@ -13,9 +13,9 @@
                 <!-- Avatar and info START -->
                 <div class="d-sm-flex align-items-center">
                     <div class="avatar avatar-xl mb-2 mb-sm-0">
-                        <img class="avatar-img rounded-circle" src="{{ user.photo.url }}" alt="">
+                        <img class="avatar-img rounded-circle" src="{% if user.photo %} {{ user.photo.url }} {% else %} {% static 'website/images/user.png' %}{% endif %}" alt="">
                     </div>
-                    <h4 class="mb-2 mb-sm-0 ms-sm-3"><span class="fw-light">Здравствуй,</span> {{ user.first_name }} {{ user.last_name }} 👋</h4>
+                    <h4 class="mb-2 mb-sm-0 ms-sm-3"><span class="fw-light">{% if user.first_name %} Здравствуй,</span> {{ user.first_name }} {{ user.last_name }} 👋 {% else %} <a style="color: black; font-size: 25px; text-decoration: underline;" href="{% url 'app:app_settings' %}">Заполните свои данные!</a>{% endif %}</h4>
                     <a href="add-listing.html" class="btn btn-sm mb-0 ms-auto flex-shrink-0"
                        style="background-color: #099642; color: white;"><i
                             class="bi bi-plus-lg fa-fw me-2"></i>Создать заявку</a>
