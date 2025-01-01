@@ -1,0 +1,40 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+
+    <!-- =======================
+    Main banner START -->
+    <section class="p-xl-0" style="padding: 0px;">
+        <div class="container">
+            <div class="row d-flex justify-content-center align-items-center text-center vh-100">
+                <div class="col-xl-8">
+                    <!-- Title -->
+                    <h1>У вас нет доступа к этой странице!</h1>
+                    <h6 class="text-primary">На главную 👈</h6>
+
+
+                    <!-- Social links -->
+                    <ul class="list-inline hstack flex-wrap gap-2 gap-lg-4 h6 justify-content-center mt-4 mb-0">
+                        <li class="list-inline-item"><a class="text-facebook" href="#"><i
+                                class="fa-brands fa-facebook-square"></i> Facebook</a></li>
+                        <li class="list-inline-item"><a class="text-instagram-gradient" href="#"><i
+                                class="fa-brands fa-instagram-square"></i> Instagram</a></li>
+                        <li class="list-inline-item"><a class="text-twitter" href="#"><i
+                                class="fa-brands fa-twitter-square"></i> Twitter</a></li>
+                        <li class="list-inline-item"><a class="text-linkedin" href="#"><i
+                                class="fa-brands fa-linkedin"></i> Linkedin</a></li>
+                    </ul>
+
+                    <!-- Image -->
+                    <img src="{% static 'website/images/zamok.webp' %}" style="height: 250px; padding-top: 25px;" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Main banner START -->
+
+</main>
+{% endblock %}

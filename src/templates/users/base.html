@@ -144,7 +144,7 @@
         {% if user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link {% if request.resolver_match.url_name == 'index' and 'app' in request.path %}active{% endif %}"
-               href="{% url 'app:index' %}">
+               href="{% if user.role == 'manager' %}{% url 'managers:index' %}{% elif user.role == 'realtor' %}{% url 'realtors:index' %}{% else %}Error{% endif %}">
                 <i class="bi bi-person-circle fa-fw"></i>
                 <span class="mb-0 nav-text">Аккаунт</span>
             </a>

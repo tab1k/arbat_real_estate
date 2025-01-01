@@ -245,8 +245,10 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="{% url 'app:app_index' %}"><i
-                                class="bi bi-bookmark-check fa-fw me-2"></i>Аккаунт</a>
+                        <li>
+                            <a class="dropdown-item" href="{% if user.role == 'manager' %}{% url 'managers:index' %}{% elif user.role == 'realtor' %}{% url 'realtors:index' %}{% else %}Error{% endif %}">
+                                <i class="bi bi-bookmark-check fa-fw me-2"></i>Аккаунт
+                            </a>
                         </li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Настройки</a></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Помощь</a>
@@ -585,7 +587,7 @@ Footer END -->
         {% if user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link {% if request.resolver_match.url_name == 'index' and 'app' in request.path %}active{% endif %}"
-               href="{% url 'app:app_index' %}">
+               href="{% if user.role == 'manager' %}{% url 'managers:index' %}{% elif user.role == 'realtor' %}{% url 'realtors:index' %}{% else %}Error{% endif %}">
                 <i class="bi bi-person-circle fa-fw"></i>
                 <span class="mb-0 nav-text">Аккаунт</span>
             </a>

@@ -33,15 +33,19 @@ ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '8000', '192.168.1.150']
 
 INSTALLED_APPS = [
     'jazzmin',
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "app.apps.AppConfig",
+    "managers.apps.AppConfig",
+    "realtors.apps.App2Config",
     "users.apps.UsersConfig",
     "website.apps.WebsiteConfig",
+    "applications.apps.ApplicationsConfig",
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +56,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "users.middleware.RoleMiddleware",
 ]
 
 ROOT_URLCONF = "arbat.urls"
@@ -197,14 +202,14 @@ JAZZMIN_SETTINGS = {
         {"model": "auth.User"},
 
         # App with dropdown menu to all its models pages (Permissions checked against models)
-        {"app": "books"},
+        {"managers": "books"},
     ],
 
     #############
     # User Menu #
     #############
 
-    # Additional links to include in the user menu on the top right ("app" url type is not allowed)
+    # Additional links to include in the user menu on the top right ("managers" url type is not allowed)
     "usermenu_links": [
         {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
         {"model": "auth.user"}
@@ -229,7 +234,7 @@ JAZZMIN_SETTINGS = {
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
     "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
 
-    # Custom links to append to app groups, keyed on app name
+    # Custom links to append to managers groups, keyed on managers name
     "custom_links": {
         "books": [{
             "name": "Make Messages",

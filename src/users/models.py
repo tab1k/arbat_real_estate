@@ -9,9 +9,9 @@ from django.core.exceptions import ValidationError
 class CustomUser(AbstractUser):
 
     USER_ROLES = (
-        ('admin', 'Администратор'),
+        ('realtor', 'Риелтор'),
         ('manager', 'Менеджер'),
-        ('user', 'Пользователь'),
+
     )
 
     username = None  # Удаляем стандартное поле username
@@ -29,7 +29,7 @@ class CustomUser(AbstractUser):
 
     photo = models.ImageField(upload_to='user_photos/', blank=True, verbose_name="Фотография")
 
-    role = models.CharField(choices=USER_ROLES, blank=False, max_length=255)
+    role = models.CharField(choices=USER_ROLES, blank=False, default='realtor' ,max_length=255)
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = []

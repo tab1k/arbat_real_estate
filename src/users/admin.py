@@ -2,10 +2,16 @@ from django.contrib import admin
 from .models import *
 
 
+@admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('phone_number', 'email', 'date_of_birth', 'photo')
-    search_fields = ('phone_number', 'email')
-    list_filter = ('date_of_birth',)
+    list_display = ('phone_number', 'role', 'first_name', 'last_name')
+    search_fields = ('phone_number',)
 
-
-admin.site.register(CustomUser, CustomUserAdmin)
+    fieldsets = (
+        (None, {
+            'fields': ('phone_number', 'role', 'password')
+        }),
+        ('Personal info', {
+            'fields': ('first_name', 'last_name', 'email', 'photo')
+        }),
+    )
