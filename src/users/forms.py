@@ -1,11 +1,13 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import get_user_model
-
+from django.contrib.auth.forms import UserChangeForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
 import re
+
+from .models import CustomUser
 
 User = get_user_model()
 
@@ -118,3 +120,21 @@ class UserSignUpForm(UserCreationForm):
         cleaned_phone_number = '+7' + cleaned_phone_number[1:]
 
         return cleaned_phone_number
+
+
+
+class CustomUserUpdateForm(UserChangeForm):
+    class Meta:
+        model = CustomUser
+        fields = ('first_name', 'last_name', 'email', 'phone_number', 'date_of_birth', 'photo')
+        widgets = {
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data.get('phone_number')
+        if phone_number:
+            # Проверка на уникальность номера
+            if CustomUser.objects.exclude(id=self.instance.id).filter(phone_number=phone_number).exists():
+                raise ValidationError("Этот номер телефона уже используется.")
+        return phone_number

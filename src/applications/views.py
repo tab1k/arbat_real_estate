@@ -23,15 +23,32 @@ class MortgageApplicationCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class MyApplicationsView(ListView):
+class BaseApplicationsView(LoginRequiredMixin, ListView):
     model = MortgageApplication
-    template_name = 'app/realtors/my-applications.html'
     context_object_name = 'applications'
+    paginate_by = 10
+    ordering = ['-created_at']
 
     def get_queryset(self):
-        # Фильтруем заявки для текущего пользователя, если его роль "rieltor"
-        return MortgageApplication.objects.filter(realtor=self.request.user, realtor__role='realtor').order_by(
-            '-created_at')
+        queryset = super().get_queryset()
+        return self.filter_queryset(queryset)
 
-    paginate_by = 10  # Пагинация
-    ordering = ['-created_at']
+    def filter_queryset(self, queryset):
+        # Этот метод будет переопределен в дочерних классах
+        return queryset
+
+
+class AllApplicationsView(BaseApplicationsView):
+    template_name = 'app/managers/all-applications.html'
+
+    def filter_queryset(self, queryset):
+        # Возвращаем все заявки для менеджеров
+        return queryset.order_by('-created_at')
+
+
+class MyApplicationsView(BaseApplicationsView):
+    template_name = 'app/realtors/my-applications.html'
+
+    def filter_queryset(self, queryset):
+        # Фильтруем заявки для текущего пользователя, если он риэлтор
+        return queryset.filter(realtor=self.request.user, realtor__role='realtor').order_by('-created_at')

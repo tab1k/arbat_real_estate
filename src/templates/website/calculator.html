@@ -8,7 +8,7 @@
     Main Content START -->
     <section class="vh-xxl-100" style="padding-top: 20px;">
         <div class="container h-100 d-flex px-0 px-sm-4">
-            <div class="row justify-content-center align-items-center m-auto">
+            <div class="container row justify-content-center align-items-center m-auto">
                 <div class="col-12">
                     <div class="bg-mode shadow rounded-3 overflow-hidden">
                         <div class="row g-0">
@@ -20,107 +20,50 @@
                                     <p class="mb-0">Расчитай свою недвижимость!</p>
 
                                     <!-- Form START -->
-                                    <form class="mt-4 text-start">
-                                        <!-- Email -->
+                                    <form id="calculator-form" class="mt-4 text-start">
+                                        <!-- Местонахождение -->
                                         <div class="mb-3">
                                             <label class="form-label">Местонахождение приобретаемой
                                                 недвижимости*</label>
-                                            <input type="city" class="form-control">
+                                            <select class="form-control" id="city-select" required>
+                                                <option value="">Выберите город 👇</option>
+                                                <option value="Нур-Султан">Нур-Султан</option>
+                                                <option value="Алматы">Алматы</option>
+                                                <option value="Шымкент">Шымкент</option>
+                                                <!-- Другие города... -->
+                                            </select>
                                         </div>
 
+                                        <!-- Стоимость недвижимости -->
                                         <div class="mb-3">
-                                            <input type="checkbox" name="" id=""><span> С дополнительным подтверждением дохода*</span>
-                                        </div>
-
-                                        <!-- Password -->
-                                        <div class="mb-3 position-relative">
                                             <label class="form-label">Стоимость недвижимости*</label>
-                                            <input class="form-control" type="price" id="psw-input">
+                                            <input class="form-control" type="number" id="property-price" required>
                                         </div>
 
-                                        <div class="mb-3 position-relative">
+                                        <!-- Первоначальный взнос -->
+                                        <div class="mb-3">
                                             <label class="form-label">Первоначальный взнос*</label>
-                                            <input class="form-control" type="first_price" id="">
+                                            <input class="form-control" type="number" id="initial-payment" required>
                                         </div>
 
-                                        <div class="mb-3 position-relative">
+                                        <!-- Срок (мес) -->
+                                        <div class="mb-3">
                                             <label class="form-label" for="duration">Срок (мес)*</label>
-                                            <input
-                                                    type="range"
-                                                    class="form-range"
-                                                    id="duration"
-                                                    name="duration"
-                                                    min="36"
-                                                    max="120"
-                                                    step="1"
-                                                    value="36"
-                                                    oninput="document.getElementById('rangeValue').innerText = this.value">
-
-                                            <!-- Текущее значение -->
+                                            <input type="range" class="form-range" id="duration" name="duration"
+                                                   min="36" max="120" step="1" value="36"
+                                                   oninput="document.getElementById('rangeValue').innerText = this.value">
                                             <div class="d-flex justify-content-between mt-2">
-                                                <span>36</span> <!-- Минимальное значение -->
-                                                <span id="rangeValue">77</span> <!-- Текущее значение -->
-                                                <span>120</span> <!-- Максимальное значение -->
+                                                <span>36</span>
+                                                <span id="rangeValue">36</span> <!-- Текущее значение -->
+                                                <span>120</span>
                                             </div>
                                         </div>
 
-                                        <style>
-                                            /* Основной стиль для ползунка */
-                                            input[type="range"] {
-                                                -webkit-appearance: none; /* Убираем стандартный стиль */
-                                                width: 100%;
-                                                height: 6px;
-                                                background: #ddd; /* Цвет дорожки */
-                                                border-radius: 5px;
-                                                outline: none;
-                                                transition: background 0.3s;
-                                                accent-color: #099642; /* Цвет для современных браузеров */
-                                            }
-
-                                            /* Стилизация для кружка (ползунка) */
-                                            input[type="range"]::-webkit-slider-thumb {
-                                                -webkit-appearance: none;
-                                                appearance: none;
-                                                width: 20px;
-                                                height: 20px;
-                                                border-radius: 50%; /* Делаем круг */
-                                                background: #099642; /* Цвет кружка */
-                                                cursor: pointer;
-                                                transition: background 0.3s;
-                                            }
-
-                                            /* Стилизация для Firefox */
-                                            input[type="range"]::-moz-range-thumb {
-                                                width: 20px;
-                                                height: 20px;
-                                                border-radius: 50%; /* Делаем круг */
-                                                background: #099642; /* Цвет кружка */
-                                                cursor: pointer;
-                                                border: none; /* Убираем рамку */
-                                            }
-
-                                            /* Дополнительно: Изменение цвета при наведении */
-                                            input[type="range"]::-webkit-slider-thumb:hover,
-                                            input[type="range"]::-moz-range-thumb:hover {
-                                                background: #077a33; /* Темнее при наведении */
-                                            }
-                                        </style>
-
-
-                                        <!-- Button -->
+                                        <!-- Кнопка для расчета -->
                                         <div>
                                             <button type="submit" class="btn btn-primary w-100 mb-0"
                                                     style="background-color: #099642; border: #099642;">Рассчитать
                                             </button>
-                                        </div>
-
-
-
-
-                                        <!-- Copyright -->
-                                        <div class="text-primary-hover text-body mt-3 text-center"> Copyrights ©2024
-                                            Arbat Real Estate. Создано компанией <a href="https://www.workbench.kz/"
-                                                                                    class="text-body">WorkBench</a>.
                                         </div>
                                     </form>
                                     <!-- Form END -->
@@ -153,25 +96,6 @@
                                                disabled>
                                     </div>
 
-                                    <!-- Способы погашения -->
-                                    <div class="mb-4">
-                                        <label class="form-label">Способы погашения</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="repayment-method"
-                                                   id="annuity" checked>
-                                            <label class="form-check-label" for="annuity">
-                                                Аннуитетный платеж
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="repayment-method"
-                                                   id="differentiated">
-                                            <label class="form-check-label" for="differentiated">
-                                                Дифференцированный платеж
-                                            </label>
-                                        </div>
-                                    </div>
-
                                     <!-- Кнопка подачи заявки -->
                                     <div class="text-center">
                                         <button class="btn"
@@ -181,24 +105,59 @@
                                     </div>
                                 </div>
                             </div>
-                            <style>
-                                .form-control {
-                                    border-color: #099642;
-                                }
-
-                                .form-check-input:checked {
-                                    background-color: #099642;
-                                    border-color: #099642;
-                                }
-
-                            </style>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("calculator-form");
+    const loanAmountInput = document.getElementById("loan-amount");
+    const monthlyPaymentInput = document.getElementById("monthly-payment");
+    const interestRateInput = document.getElementById("interest-rate");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Получаем данные из формы
+        const city = document.getElementById("city-select").value;
+        const propertyPrice = parseFloat(document.getElementById("property-price").value);
+        const initialPayment = parseFloat(document.getElementById("initial-payment").value);
+        const duration = parseInt(document.getElementById("duration").value);
+
+        // Проверка введенных данных
+        if (!city || isNaN(propertyPrice) || isNaN(initialPayment) || !duration) {
+            alert("Пожалуйста, заполните все обязательные поля.");
+            return;
+        }
+
+        // Рассчитываем сумму кредита
+        const loanAmount = propertyPrice - initialPayment;
+
+        // Определяем ставку (условный пример)
+        let interestRate = 7.5; // Ставка для клиентов с подтверждением дохода
+
+        // Рассчитываем месячный платеж (формула аннуитета)
+        const monthlyInterestRate = interestRate / 100 / 12;
+        const monthlyPayment = (
+            loanAmount *
+            monthlyInterestRate *
+            Math.pow(1 + monthlyInterestRate, duration)
+        ) / (Math.pow(1 + monthlyInterestRate, duration) - 1);
+
+        // Обновляем блок "Рассчитанный результат"
+        loanAmountInput.value = `${loanAmount.toFixed(2)} KZT`;
+        monthlyPaymentInput.value = `${monthlyPayment.toFixed(2)} KZT`;
+        interestRateInput.value = `${interestRate}%`;
+    });
+});
+
+    </script>
+
 
     <section class="pt-0 pt-sm-5">
         <div class="container">

@@ -4073,9 +4073,9 @@ textarea.form-control-lg {
   --bs-dropdown-divider-margin-y: 0.5rem;
   --bs-dropdown-box-shadow: 0px 0px 40px rgba(29, 58, 83, 0.1);
   --bs-dropdown-link-color: var(--bs-gray-600);
-  --bs-dropdown-link-hover-color: #5143d9;
-  --bs-dropdown-link-hover-bg: rgba(var(--bs-primary-rgb), 0.1);
-  --bs-dropdown-link-active-color: #5143d9;
+  --bs-dropdown-link-hover-color: white;
+  --bs-dropdown-link-hover-bg: #099642;
+  --bs-dropdown-link-active-color: #099642;
   --bs-dropdown-link-active-bg: rgba(var(--bs-primary-rgb), 0.1);
   --bs-dropdown-link-disabled-color: var(--bs-gray-600);
   --bs-dropdown-item-padding-x: 1rem;
@@ -4497,7 +4497,7 @@ textarea.form-control-lg {
   }
 }
 .nav-link:hover, .nav-link:focus {
-  color: var(--bs-nav-link-hover-color);
+  color: #099642;
 }
 .nav-link:focus-visible {
   outline: 0;
@@ -4611,9 +4611,9 @@ textarea.form-control-lg {
   --bs-navbar-padding-x: 0;
   --bs-navbar-padding-y: 0;
   --bs-navbar-color: #0b0a12;
-  --bs-navbar-hover-color: #5143d9;
+  --bs-navbar-hover-color: green;
   --bs-navbar-disabled-color: rgba(0, 0, 0, 0.3);
-  --bs-navbar-active-color: #5143d9;
+  --bs-navbar-active-color: #099642;
   --bs-navbar-brand-padding-y: 30px;
   --bs-navbar-brand-margin-end: 1rem;
   --bs-navbar-brand-font-size: 1.25rem;
@@ -4692,7 +4692,7 @@ textarea.form-control-lg {
   list-style: none;
 }
 .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
-  color: var(--bs-navbar-active-color);
+  color: green;
 }
 .navbar-nav .dropdown-menu {
   position: static;
@@ -17836,8 +17836,8 @@ a.badge:hover {
 }
 .nav.nav-bottom-line .nav-link.active {
   background: transparent;
-  color: var(--bs-primary);
-  border-bottom: 3px solid var(--bs-primary);
+  color: #099642;
+  border-bottom: 3px solid #099642;
 }
 
 .nav-pills-shadow .nav-item {
@@ -19046,7 +19046,7 @@ a.badge:hover {
 }
 .pagination-primary-soft .page-item.page-item.active .page-link {
   color: #fff;
-  background-color: var(--bs-primary);
+  background-color: #099642;
 }
 .pagination-primary-soft .page-link {
   border: transparent;
@@ -19730,7 +19730,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
           transform: translateY(50%);
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background: var(--bs-primary);
+  background: #099642;
   color: #fff;
   border-radius: 10%;
   width: 52px;
@@ -20097,7 +20097,7 @@ body.dashboard main {
     padding: 0;
   }
   .navbar-mobile .nav-item .nav-link.active, .navbar-mobile .nav-item .nav-link:hover {
-    color: var(--bs-navbar-active-color);
+    color: #099642;
   }
   .navbar-mobile .nav-item .nav-link .nav-text {
     font-size: 0.6em;

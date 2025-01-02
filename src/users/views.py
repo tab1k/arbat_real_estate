@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 
 from .forms import *
 
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, UpdateView
 
 from django.urls import reverse_lazy
 
@@ -52,6 +52,21 @@ class SignUpView(FormView):
         user.save()
 
         return super().form_valid(form)
+
+
+class CustomUserUpdateView(UpdateView):
+    model = CustomUser
+    form_class = CustomUserUpdateForm
+    template_name = 'users/settings.html'
+    success_url = reverse_lazy('users:profile')  # Страница, на которую будет перенаправляться после успешного обновления
+
+    def get_object(self, queryset=None):
+        return self.request.user  # Обновляем только профиль текущего пользователя
+
+    def form_valid(self, form):
+        # Здесь можно добавить дополнительные действия перед сохранением формы
+        return super().form_valid(form)
+
 
 
 class ForgotPasswordView(View):

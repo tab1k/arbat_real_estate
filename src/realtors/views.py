@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import TemplateView
 from users.models import CustomUser
-
 from applications.models import MortgageApplication
 
 
@@ -23,9 +22,6 @@ class IndexView(TemplateView):
         ).count()
         return context
 
-
-class SettingsView(TemplateView):
-    template_name = 'app/realtors/settings.html'
 
 
 class CreateRequestView(View):

@@ -7,6 +7,10 @@ class RoleMiddleware:
 
     def __call__(self, request):
         if request.user.is_authenticated:
+            # Проверка: если пользователь суперпользователь, то ему разрешено все
+            if request.user.is_superuser:
+                return self.get_response(request)
+
             # Проверяем роль пользователя в зависимости от URL
             if request.path.startswith('/managers/') and request.user.role != 'manager':
                 return redirect('users:role_exists')  # Например, URL 'users:role_exists'

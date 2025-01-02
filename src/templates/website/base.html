@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en" data-bs-theme="light">
+<html lang="ru" data-bs-theme="light">
 <head>
     <title>Arbat Real Estate</title>
 
@@ -103,7 +103,7 @@
     <nav class="navbar navbar-expand-xl">
         <div class="container">
             <!-- Logo START -->
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <img class="light-mode-item navbar-brand-item" src="{% static 'website/images/logo.png' %}" alt="logo">
                 <img class="dark-mode-item navbar-brand-item" src="{% static 'website/images/logo.png' %}" alt="logo">
             </a>
@@ -116,12 +116,12 @@
             </button>
 
             <!-- Responsive category toggler -->
-            <button class="navbar-toggler ms-sm-auto mx-3 me-md-0 p-0 p-sm-2" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCategoryCollapse" aria-controls="navbarCategoryCollapse"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <i class="bi bi-grid-3x3-gap-fill fa-fw"></i><span
-                    class="d-none d-sm-inline-block small">Category</span>
-            </button>
+<!--            <button class="navbar-toggler ms-sm-auto mx-3 me-md-0 p-0 p-sm-2" type="button" data-bs-toggle="collapse"-->
+<!--                    data-bs-target="#navbarCategoryCollapse" aria-controls="navbarCategoryCollapse"-->
+<!--                    aria-expanded="false" aria-label="Toggle navigation">-->
+<!--                <i class="bi bi-grid-3x3-gap-fill fa-fw"></i><span-->
+<!--                    class="d-none d-sm-inline-block small">Category</span>-->
+<!--            </button>-->
 
             <!-- Nav category menu START -->
             <div class="navbar-collapse collapse" id="navbarCategoryCollapse">
@@ -247,10 +247,9 @@
                         </li>
                         <li>
                             <a class="dropdown-item" href="{% if user.role == 'manager' %}{% url 'managers:index' %}{% elif user.role == 'realtor' %}{% url 'realtors:index' %}{% else %}Error{% endif %}">
-                                <i class="bi bi-bookmark-check fa-fw me-2"></i>Аккаунт
+                                <i class="bi bi-gear fa-fw me-2"></i>Аккаунт
                             </a>
                         </li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Настройки</a></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Помощь</a>
                         </li>
                         <li>

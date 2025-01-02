@@ -1,11 +1,12 @@
 from .views import *
 from django.urls import path
 
+from applications.views import AllApplicationsView
+
 app_name = 'managers'
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
-    path('settings/', AppSettingsView.as_view(), name='app_settings'),
-    path('my-listings/', MyListingsView.as_view(), name='my_listings'),
+    path('all-applications/', AllApplicationsView.as_view(), name='all-applications'),
 
 ]

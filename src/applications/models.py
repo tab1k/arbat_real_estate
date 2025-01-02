@@ -24,6 +24,8 @@ class MortgageApplication(models.Model):
 
     status = models.CharField(choices=STATUS_CHOICES, blank=True, max_length=50, default='in_work')
 
+    code = models.CharField(max_length=10, blank=True, null=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
