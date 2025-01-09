@@ -1,0 +1,433 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+
+    <!-- =======================
+    Menu item START -->
+    <section class="pt-4">
+        <div class="container">
+            <div class="card rounded-3 border p-3 pb-2">
+                <!-- Avatar and info START -->
+                <div class="d-sm-flex align-items-center">
+                    <div class="avatar avatar-xl mb-2 mb-sm-0">
+                        <img class="avatar-img rounded-circle"
+                             src="{% if user.photo %} {{ user.photo.url }} {% else %} {% static 'website/images/user.png' %}{% endif %}"
+                             alt="">
+                    </div>
+                    <h4 class="mb-2 mb-sm-0 ms-sm-3"><span class="fw-light">{% if user.first_name %} Здравствуй,</span>
+                        {{ user.first_name }} {{ user.last_name }} 👋 {% else %} <a
+                                style="color: black; font-size: 25px; text-decoration: underline;"
+                                href="{% url 'managers:settings' %}">Заполните свои данные!</a>{% endif %}</h4>
+                    <a href="{% url 'realtors:create-request' %}" class="btn btn-sm mb-0 ms-auto flex-shrink-0"
+                       style="background-color: #099642; color: white;"><i
+                            class="bi bi-plus-lg fa-fw me-2"></i>Создать заявку</a>
+                </div>
+                <!-- Avatar and info START -->
+
+                <!-- Responsive navbar toggler -->
+                <button class="btn btn-primary w-100 d-block d-xl-none mt-2" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#dashboardMenu" aria-controls="dashboardMenu">
+                    <i class="bi bi-list"></i> Приборная панель
+                </button>
+
+                <!-- Nav links START -->
+                <div class="offcanvas-xl offcanvas-end mt-xl-3" tabindex="-1" id="dashboardMenu">
+                    <div class="offcanvas-header border-bottom p-3">
+                        <h5 class="offcanvas-title">Меню</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                data-bs-target="#dashboardMenu" aria-label="Close"></button>
+                    </div>
+                    <!-- Offcanvas body -->
+                    <div class="offcanvas-body p-3 p-xl-0">
+                        <!-- Nav item -->
+                        <div class="navbar navbar-expand-xl">
+                            <ul class="navbar-nav navbar-offcanvas-menu">
+
+                                <li class="nav-item"><a class="nav-link" href="{% url 'managers:index' %}"><i
+                                        class="bi bi-house-door fa-fw me-1"></i>Приборная панель</a></li>
+
+                                <li class="nav-item"><a class="nav-link"
+                                                        href="{% url 'managers:all-applications'  %}"><i
+                                        class="bi bi-journals fa-fw me-1"></i>Заявки</a></li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{% url 'managers:accepted-application' %}">
+                                        <i class="bi bi-star fa-fw me-1"></i>Принятые
+                                    </a>
+                                </li>
+
+
+                                <li class="nav-item"><a class="nav-link" href="agent-activities.html"><i
+                                        class="bi bi-bell fa-fw me-1"></i>Activities</a></li>
+
+                                <li class="nav-item"><a class="nav-link" href="agent-earnings.html"><i
+                                        class="bi bi-graph-up-arrow fa-fw me-1"></i>Earnings</a></li>
+
+                                <li class="nav-item"><a class="nav-link" href="agent-reviews.html"><i
+                                        class="bi bi-star fa-fw me-1"></i>Reviews</a></li>
+
+                                <li><a class="nav-link" href="{% url 'users:profile' %}"><i
+                                        class="bi bi-gear fa-fw me-1"></i>Аккаунт</a>
+                                </li>
+
+                                <!--                                <li class="nav-item dropdown">-->
+                                <!--                                    <a class="nav-link dropdown-toggle" href="#" id="dropdoanMenu"-->
+                                <!--                                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                <!--                                        <i class="bi bi-list-ul fa-fw me-1"></i>Dropdown-->
+                                <!--                                    </a>-->
+                                <!--                                    <ul class="dropdown-menu" aria-labelledby="dropdoanMenu">-->
+                                <!--                                        &lt;!&ndash; Dropdown menu &ndash;&gt;-->
+                                <!--                                        <li><a class="dropdown-item" href="#">Item 1</a></li>-->
+                                <!--                                        <li><a class="dropdown-item" href="#">Item 2</a></li>-->
+                                <!--                                    </ul>-->
+                                <!--                                </li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Nav links END -->
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Menu item END -->
+
+    <!-- =======================
+    Content START -->
+    <section class="pt-0">
+        <div class="container vstack gap-4">
+            <!-- Title START -->
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="fs-4 mb-0"><i class="bi bi-gear fa-fw me-1"></i>Заявка № {{ application.id }}</h1>
+                </div>
+            </div>
+            <!-- Title END -->
+
+            <!-- Tabs START -->
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="bg-light pb-0 px-2 px-lg-0 rounded-top">
+                        <ul class="nav nav-tabs nav-bottom-line nav-responsive border-0 nav-justified" role="tablist">
+                            <li class="nav-item" role="presentation"><a class="nav-link mb-0 active"
+                                                                        data-bs-toggle="tab" href="#tab-1"
+                                                                        aria-selected="true" role="tab"><i
+                                    class="fas fa-cog fa-fw me-2"></i>Детали заявки</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link mb-0" data-bs-toggle="tab"
+                                                                        href="#tab-2" aria-selected="false"
+                                                                        tabindex="-1" role="tab"><i
+                                    class="fas fa-bell fa-fw me-2"></i>Данные о риэлторе</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Tabs END -->
+
+            <!-- Tabs Content START -->
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="tab-content">
+                        <!-- Tab content 1 START -->
+                        <div class="tab-pane show active" id="tab-1" role="tabpanel">
+                            <div class="row g-4">
+                                <!-- Edit profile START -->
+                                <div class="col-12">
+                                    <div class="card border">
+                                        <div class="card-header border-bottom">
+                                            <h5 class="card-header-title">Информация</h5>
+                                        </div>
+                                        <form method="post" enctype="multipart/form-data" class="card-body">
+                                            <input type="hidden" name="csrfmiddlewaretoken"
+                                                   value="YlkqnyLQpkmXmxKAA1bnBrfGGC0nSXFxDxTa1Jb1ZPH8CnYuB9avaFdWXm6AeaDF">
+
+                                            <!-- First Name -->
+                                            <label class="form-label">Имя</label>
+                                            <input type="text" value="{{ application.full_name }}" maxlength="150"
+                                                   class="form-control">
+
+                                            <label class="form-label">Номер телефона</label>
+                                            <input type="text" value="{{ application.phone_number }}" maxlength="150"
+                                                   class="form-control">
+
+                                            <label class="form-label">ИИН</label>
+                                            <input value="{{ application.iin }}" maxlength="254"
+                                                   class="form-control">
+
+                                            <label class="form-label">Город</label>
+                                            <input type="text" value="{{ application.city }}" maxlength="150"
+                                                   class="form-control">
+
+                                            <label class="form-label">Сумма ипотеки</label>
+                                            <input type="text" value="{{ application.amount }}" maxlength="254"
+                                                   class="form-control">
+
+                                            <label class="form-label">Первоначальный взнос</label>
+                                            <input type="text" value="{{ application.down_payment }}" maxlength="254"
+                                                   class="form-control">
+
+                                            <label class="form-label">Срок ипотеки</label>
+                                            <input type="text" value="{{ application.mortgage_term }}" maxlength="254"
+                                                   class="form-control">
+
+                                            <label class="form-label">Время</label>
+                                            <input type="text" name="phone_number" value="{{ application.created_at }}"
+                                                   maxlength="25"
+                                                   class="form-control" required="" id="id_phone_number">
+
+                                            <hr style="margin-top: 30px">
+
+                                            <label class="form-label">Код</label>
+                                            <input type="text" value="" maxlength="254"
+                                                   class="form-control">
+
+
+                                            <div class="text-end mt-3">
+                                                <button type="submit" class="btn mb-0"
+                                                        style="background-color: #099642; color: white;">Сохранить
+                                                    изменения
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <style>
+                                            label.form-label {
+                                                margin-bottom: 0;
+                                                margin-top: 5px;
+                                            }
+                                        </style>
+                                    </div>
+                                </div>
+                                <!-- Edit profile END -->
+
+
+                            </div>
+                        </div>
+                        <!-- Tab content 1 END -->
+
+                        <!-- Tab content 2 START -->
+                        <div class="tab-pane" id="tab-2" role="tabpanel">
+                            <div class="row g-4">
+                                <div class="col-12">
+                                    <div class="tab-content">
+                                        <!-- Tab content 1 START -->
+                                        <div class="tab-pane active show" id="tab-1" role="tabpanel">
+                                            <div class="row g-4">
+                                                <!-- Edit profile START -->
+                                                <div class="col-12">
+                                                    <div class="card border">
+                                                        <div class="card-header border-bottom">
+                                                            <h5 class="card-header-title">Информация</h5>
+                                                        </div>
+                                                        <form method="post" enctype="multipart/form-data"
+                                                              class="card-body">
+                                                            <input type="hidden" name="csrfmiddlewaretoken"
+                                                                   value="YlkqnyLQpkmXmxKAA1bnBrfGGC0nSXFxDxTa1Jb1ZPH8CnYuB9avaFdWXm6AeaDF">
+
+                                                            <!-- First Name -->
+                                                            <label class="form-label">Имя</label>
+                                                            <input type="text" value="Баяхметов"
+                                                                   maxlength="150" class="form-control">
+
+                                                            <label class="form-label">Номер телефона</label>
+                                                            <input type="text" value="+77077772817" maxlength="150"
+                                                                   class="form-control">
+
+                                                            <label class="form-label">ИИН</label>
+                                                            <input value="11228551438" maxlength="254"
+                                                                   class="form-control">
+
+                                                            <label class="form-label">Город</label>
+                                                            <input type="text" value="Астана" maxlength="150"
+                                                                   class="form-control">
+
+                                                            <label class="form-label">Сумма ипотеки</label>
+                                                            <input type="text" value="10000000,00" maxlength="254"
+                                                                   class="form-control">
+
+                                                            <label class="form-label">Первоначальный взнос</label>
+                                                            <input type="text" value="2000000,00" maxlength="254"
+                                                                   class="form-control">
+
+                                                            <label class="form-label">Срок ипотеки</label>
+                                                            <input type="text" value="12" maxlength="254"
+                                                                   class="form-control">
+
+                                                            <label class="form-label">Время</label>
+                                                            <input type="text" name="phone_number"
+                                                                   value="3 января 2025 г. 5:06" maxlength="25"
+                                                                   class="form-control" required=""
+                                                                   id="id_phone_number">
+
+                                                            <hr style="margin-top: 30px">
+
+                                                            <label class="form-label">Код</label>
+                                                            <input type="text" value="" maxlength="254"
+                                                                   class="form-control">
+
+
+                                                            <div class="text-end mt-3">
+                                                                <button type="submit" class="btn mb-0"
+                                                                        style="background-color: #099642; color: white;">
+                                                                    Сохранить
+                                                                    изменения
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                        <style>
+                                                            label.form-label {
+                                                                margin-bottom: 0;
+                                                                margin-top: 5px;
+                                                            }
+                                                        </style>
+                                                    </div>
+                                                </div>
+                                                <!-- Edit profile END -->
+
+
+                                            </div>
+                                        </div>
+                                        <!-- Tab content 1 END -->
+
+                                        <!-- Tab content 2 START -->
+                                        <div class="tab-pane" id="tab-2" role="tabpanel">
+                                            <div class="card border mb-4">
+                                                <!-- Card header -->
+                                                <div class="card-header bg-transparent border-bottom">
+                                                    <h5 class="card-header-title">Notification Settings</h5>
+                                                    <p class="mb-0">Figure what you want to be notified about, and
+                                                        unsubscribe from what
+                                                        you don't.</p>
+                                                </div>
+
+                                                <!-- Form START -->
+                                                <form class="card-body">
+                                                    <!-- Radio -->
+                                                    <div class="mb-4">
+                                                        <label class="form-label">Newsletter *</label>
+                                                        <div class="d-flex gap-4 flex-wrap">
+                                                            <div class="form-check radio-bg-light">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="flexRadioDefault" id="flexRadioDaily"
+                                                                       checked="">
+                                                                <label class="form-check-label" for="flexRadioDaily">
+                                                                    Daily
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check radio-bg-light">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="flexRadioDefault" id="flexRadioDefault2">
+                                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                                    Twice a week
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check radio-bg-light">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="flexRadioDefault" id="flexRadioDefault3">
+                                                                <label class="form-check-label" for="flexRadioDefault3">
+                                                                    Weekly
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check radio-bg-light">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="flexRadioDefault" id="flexRadioDefault4">
+                                                                <label class="form-check-label" for="flexRadioDefault4">
+                                                                    Never
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Switch -->
+                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
+                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy1">Notify
+                                                            me via
+                                                            email when logging in</label>
+                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
+                                                               id="checkPrivacy1" checked="">
+                                                    </div>
+
+                                                    <!-- Switch -->
+                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
+                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy2">I
+                                                            would like to
+                                                            receive booking assist reminders</label>
+                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
+                                                               id="checkPrivacy2" checked="">
+                                                    </div>
+
+                                                    <!-- Switch -->
+                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
+                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy3">I
+                                                            would like to
+                                                            receive emails about Booking promotions</label>
+                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
+                                                               id="checkPrivacy3" checked="">
+                                                    </div>
+
+                                                    <!-- Switch -->
+                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
+                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy7">I
+                                                            would like to
+                                                            know about information and offers related to my upcoming
+                                                            trip</label>
+                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
+                                                               id="checkPrivacy7" checked="">
+                                                    </div>
+
+                                                    <!-- Switch -->
+                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
+                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy4">Show
+                                                            your profile
+                                                            publicly</label>
+                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
+                                                               id="checkPrivacy4">
+                                                    </div>
+
+                                                    <!-- Switch -->
+                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
+                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy6">Send
+                                                            SMS
+                                                            confirmation for all online payments</label>
+                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
+                                                               id="checkPrivacy6">
+                                                    </div>
+
+                                                    <!-- Switch -->
+                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
+                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy5">Check
+                                                            which
+                                                            device(s) access your account</label>
+                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
+                                                               id="checkPrivacy5" checked="">
+                                                    </div>
+
+                                                    <!-- Button -->
+                                                    <div class="d-sm-flex justify-content-end">
+                                                        <button type="button" class="btn btn-sm btn-primary me-2 mb-0">
+                                                            Save changes
+                                                        </button>
+                                                        <a href="#"
+                                                           class="btn btn-sm btn-outline-secondary mb-0">Cancel</a>
+                                                    </div>
+                                                </form>
+                                                <!-- Form END -->
+                                            </div>
+                                        </div>
+                                        <!-- Tab content 2 END -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tab content 2 END -->
+                    </div>
+                </div>
+            </div>
+            <!-- Tabs Content END -->
+        </div>
+    </section>
+    <!-- =======================
+    Content END -->
+
+</main>
+{% endblock %}

@@ -6,13 +6,13 @@ from .models import MortgageApplication
 class MortgageApplicationAdmin(admin.ModelAdmin):
     # Настроим отображение столбцов в списке
     list_display = (
-        'full_name', 'phone_number', 'city', 'realtor', 'amount', 'down_payment', 'mortgage_term', 'status',
+        'full_name', 'phone_number', 'city', 'realtor', 'manager' , 'amount', 'down_payment', 'mortgage_term', 'status',
         'created_at'
     )
 
     # Настроим возможность поиска по полям
     search_fields = (
-        'full_name', 'phone_number', 'city', 'realtor__username'
+        'full_name', 'phone_number', 'city', 'realtor__phone_number', 'manager__phone_number'
     )
 
     # Определим порядок полей в форме добавления/редактирования заявки
@@ -23,8 +23,8 @@ class MortgageApplicationAdmin(admin.ModelAdmin):
         ('Сведения о заявке', {
             'fields': ('amount', 'down_payment', 'mortgage_term', 'status')
         }),
-        ('Информация о риэлторе', {
-            'fields': ('realtor',)
+        ('Информация ', {
+            'fields': ('realtor', 'manager')
         }),
         ('Дата создания', {
             'fields': ('created_at',),
@@ -37,3 +37,6 @@ class MortgageApplicationAdmin(admin.ModelAdmin):
 
     # Фильтры по статусу
     list_filter = ('status', 'created_at')
+
+
+

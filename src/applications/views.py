@@ -11,16 +11,15 @@ class MortgageApplicationCreateView(LoginRequiredMixin, CreateView):
     model = MortgageApplication
     form_class = MortgageApplicationForm
     template_name = 'app/realtors/create-request.html'
-    success_url = reverse_lazy('website:index')  # Страница с заявками после успешного создания
+    success_url = reverse_lazy('applications:success')
 
     def form_valid(self, form):
-        # # Проверяем, является ли пользователь риэлтором
-        # if self.request.user.role != 'realtor':
-        #     return redirect('/')  # Если не риэлтор, перенаправляем на главную
-
-        # Присваиваем риэлтора как создателя заявки
         form.instance.realtor = self.request.user
         return super().form_valid(form)
+
+
+class SuccessfulApplicationCreatedView(LoginRequiredMixin, TemplateView):
+    template_name ='app/success.html'
 
 
 class BaseApplicationsView(LoginRequiredMixin, ListView):
@@ -34,7 +33,6 @@ class BaseApplicationsView(LoginRequiredMixin, ListView):
         return self.filter_queryset(queryset)
 
     def filter_queryset(self, queryset):
-        # Этот метод будет переопределен в дочерних классах
         return queryset
 
 
@@ -42,13 +40,28 @@ class AllApplicationsView(BaseApplicationsView):
     template_name = 'app/managers/all-applications.html'
 
     def filter_queryset(self, queryset):
-        # Возвращаем все заявки для менеджеров
-        return queryset.order_by('-created_at')
+        # Фильтруем заявки, у которых поле manager пустое (т.е. не прикреплены к менеджеру)
+        return queryset.filter(manager__isnull=True).order_by('-created_at')
+
+    def post(self, request, *args, **kwargs):
+        application_id = request.POST.get('application_id')
+        if application_id:
+            try:
+                application = MortgageApplication.objects.get(id=application_id)
+                if request.user.role == 'manager':  # Проверяем роль
+                    application.assign_manager(request.user)
+                    application.status = 'in_work'  # Обновляем статус, если нужно
+                    application.save()
+                    # Можно добавить сообщение об успешном принятии (например, с использованием messages)
+            except MortgageApplication.DoesNotExist:
+                pass  # Обрабатываем ошибку в случае, если заявка не найдена
+        return redirect('managers:all-applications')
+
+
 
 
 class MyApplicationsView(BaseApplicationsView):
     template_name = 'app/realtors/my-applications.html'
 
     def filter_queryset(self, queryset):
-        # Фильтруем заявки для текущего пользователя, если он риэлтор
         return queryset.filter(realtor=self.request.user, realtor__role='realtor').order_by('-created_at')

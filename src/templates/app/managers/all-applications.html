@@ -35,7 +35,7 @@
                 <!-- Nav links START -->
                 <div class="offcanvas-xl offcanvas-end mt-xl-3" tabindex="-1" id="dashboardMenu">
                     <div class="offcanvas-header border-bottom p-3">
-                        <h5 class="offcanvas-title">Menu</h5>
+                        <h5 class="offcanvas-title">Меню</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                                 data-bs-target="#dashboardMenu" aria-label="Close"></button>
                     </div>
@@ -52,8 +52,12 @@
                                                         href="{% url 'managers:all-applications'  %}"><i
                                         class="bi bi-journals fa-fw me-1"></i>Заявки</a></li>
 
-                                <li class="nav-item"><a class="nav-link" href="agent-bookings.html"><i
-                                        class="bi bi-bookmark-heart fa-fw me-1"></i>Bookings</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'managers:accepted-application' %}">
+                                        <i class="bi bi-star fa-fw me-1"></i>Принятые
+                                    </a>
+                                </li>
+
 
                                 <li class="nav-item"><a class="nav-link" href="agent-activities.html"><i
                                         class="bi bi-bell fa-fw me-1"></i>Activities</a></li>
@@ -810,11 +814,10 @@
 
                                     <!-- Table body START -->
                                     <tbody class="border-top-0">
-                                    <!-- Table item -->
                                     {% for application in applications %}
                                     <tr>
                                         <td><h6 class="mb-0">{{ application.id }}</h6></td>
-                                        <td><h6 class="mb-0"><a href="#">{{ application.full_name }}</a></h6></td>
+                                        <td><h6 class="mb-0"><a href="{% url 'managers:application-detail' application.pk %}">{{ application.full_name }}</a></h6></td>
                                         <td> {{ application.phone_number }}</td>
                                         <td> {{ application.created_at|date:"d-m-Y H:i" }}</td>
                                         <td>
@@ -828,18 +831,23 @@
                                                 {{ application.get_status_display }}
                                             </div>
                                         </td>
-
                                         <td>
                                             <div class="badge bg-success bg-opacity-10 text-success">{{ application.amount }} KZT
                                             </div>
                                         </td>
-                                        <td><a href="#" class="btn btn-sm btn-light mb-0">Посмотреть</a></td>
+                                        <td>
+                                            <form method="post" action="{% url 'managers:all-applications' %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="application_id" value="{{ application.id }}">
+                                                <button type="submit" class="btn btn-sm btn-light mb-0">Принять</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                     {% empty %}
                                     <p>У вас нет заявок.</p>
                                     {% endfor %}
-
                                     </tbody>
+
                                     <!-- Table body END -->
                                 </table>
                             </div>

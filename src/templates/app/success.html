@@ -1,0 +1,36 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<main>
+
+    <!-- =======================
+    Page content START -->
+    <section class="overflow-hidden pt-0 pt-lg-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 text-center mx-auto">
+                    <!-- SVG decoration START -->
+                    <img src="{% static 'website/images/success.webp' %}" class="my-4 mb-4" style="height: 250px;" alt="">
+                    <!-- SVG decoration END -->
+
+                    <!-- Title -->
+                    <h1 class="fs-3">Вы успешно создали заявку. 🎉</h1>
+                    <!-- Info -->
+                    <p>Эта заявка будет скоро обработана менеджером. You will be informed by email that your listing has been
+                        accepted. Also, make sure your <a href="#">Payment and Tax information</a> is correct and valid.
+                    </p>
+
+                    <!-- Buttons -->
+                    <a href="{% url 'realtors:my-applications' %}" class="btn mb-5 me-1" style="background-color: #099642; color: white;">Мои заявки</a>
+                    <a href="{% url 'realtors:index' %}" class="btn btn-light mb-5">Вернуться на главную</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Page content END -->
+
+</main>
+{% endblock %}
