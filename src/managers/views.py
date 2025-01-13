@@ -3,7 +3,6 @@ from django.views.generic import TemplateView, ListView
 from users.models import CustomUser
 from applications.models import MortgageApplication
 from django.db.models import Case, When, IntegerField
-
 from applications.views import BaseApplicationsView
 
 
