@@ -7,12 +7,12 @@ class MortgageApplicationAdmin(admin.ModelAdmin):
     # Настроим отображение столбцов в списке
     list_display = (
         'full_name', 'phone_number', 'city', 'realtor', 'manager' , 'amount', 'down_payment', 'mortgage_term', 'status',
-        'created_at'
+        'created_at', 'code', 'code_requested',
     )
 
     # Настроим возможность поиска по полям
     search_fields = (
-        'full_name', 'phone_number', 'city', 'realtor__phone_number', 'manager__phone_number'
+        'full_name', 'phone_number', 'city', 'realtor__phone_number', 'manager__phone_number', 'code_requested',
     )
 
     # Определим порядок полей в форме добавления/редактирования заявки

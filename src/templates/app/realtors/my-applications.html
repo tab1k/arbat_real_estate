@@ -198,7 +198,7 @@
                                     {% for application in applications %}
                                     <tr>
                                         <td><h6 class="mb-0">{{ application.id }}</h6></td>
-                                        <td><h6 class="mb-0"><a href="#">{{ application.full_name }}</a></h6></td>
+                                        <td><h6 class="mb-0"><a href="{% url 'realtors:application-detail' application.pk  %}">{{ application.full_name }}</a></h6></td>
                                         <td> {{ application.phone_number }}</td>
                                         <td> {{ application.created_at|date:"d-m-Y H:i" }}</td>
                                         <td>

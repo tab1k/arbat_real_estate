@@ -5,11 +5,17 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
+from django import forms
+from django.contrib.auth.forms import UserChangeForm
+from django.core.exceptions import ValidationError
 import re
 
 from .models import CustomUser
 
 User = get_user_model()
+
+
+
 
 
 class UserSignInForm(AuthenticationForm):
@@ -138,3 +144,23 @@ class CustomUserUpdateForm(UserChangeForm):
             if CustomUser.objects.exclude(id=self.instance.id).filter(phone_number=phone_number).exists():
                 raise ValidationError("Этот номер телефона уже используется.")
         return phone_number
+
+
+
+class PasswordChangeForm(forms.Form):
+    current_password = forms.CharField(widget=forms.PasswordInput, label='Текущий пароль')
+    new_password = forms.CharField(widget=forms.PasswordInput, label='Новый пароль')
+    confirm_password = forms.CharField(widget=forms.PasswordInput, label='Подтвердите новый пароль')
+
+    def clean(self):
+        cleaned_data = super().clean()
+        new_password = cleaned_data.get('new_password')
+        confirm_password = cleaned_data.get('confirm_password')
+
+        if new_password != confirm_password:
+            raise ValidationError("Новый пароль и подтверждение пароля не совпадают.")
+
+        return cleaned_data
+
+
+

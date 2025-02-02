@@ -27,13 +27,14 @@ SECRET_KEY = "django-insecure-vuh5i=5tgv2q%q341@8$klhdo0_w@lx$==)=e4jfc_@&em_i2k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '8000', '192.168.1.150']
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '8000', '192.168.0.10']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'jazzmin',
+    'django_extensions',
     'rest_framework',
     'rest_framework_simplejwt',
     "django.contrib.admin",
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "website.apps.WebsiteConfig",
     "applications.apps.ApplicationsConfig",
+    'notifications',
     'widget_tweaks',
 ]
 

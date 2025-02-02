@@ -13,6 +13,7 @@ urlpatterns = [
     path('forgot-password/', ForgotPasswordView.as_view(), name='forgot-password'),
     path('role_exists/', RoleExistsPageView.as_view(), name='role_exists'),
 
+
     # API
     path('api/signin/', SignInAPIView.as_view(), name='api_signin'),
     path('api/signup/', SignUpAPIView.as_view(), name='api_signup'),

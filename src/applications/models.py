@@ -36,9 +36,10 @@ class MortgageApplication(models.Model):
     mortgage_term = models.IntegerField(verbose_name='Срок ипотеки')
     city = models.CharField(max_length=100, verbose_name='Город')
 
-    status = models.CharField(choices=STATUS_CHOICES, blank=True, max_length=50, default='in_work', verbose_name='Статус'  )
+    status = models.CharField(choices=STATUS_CHOICES, blank=True, max_length=50, default='in_work', verbose_name='Статус')
 
-    code = models.CharField(max_length=10, blank=True, null=True, verbose_name='Код заявки'  )
+    code = models.CharField(max_length=10, blank=True, null=True, verbose_name='Код заявки')
+    code_requested = models.BooleanField(default=False, verbose_name="Код запрошен")
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
 

@@ -9,6 +9,8 @@ app_name = 'realtors'
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('my-applications/', MyApplicationsView.as_view(), name='my-applications'),
+    path('application/<int:pk>/', RealtorApplicationDetailView.as_view(), name='application-detail'),
+
     path('create-request/', MortgageApplicationCreateView.as_view(), name='create-request'),
 
 ]

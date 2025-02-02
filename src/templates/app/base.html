@@ -116,12 +116,12 @@
             </button>
 
             <!-- Responsive category toggler -->
-<!--            <button class="navbar-toggler ms-sm-auto mx-3 me-md-0 p-0 p-sm-2" type="button" data-bs-toggle="collapse"-->
-<!--                    data-bs-target="#navbarCategoryCollapse" aria-controls="navbarCategoryCollapse"-->
-<!--                    aria-expanded="false" aria-label="Toggle navigation">-->
-<!--                <i class="bi bi-grid-3x3-gap-fill fa-fw"></i><span-->
-<!--                    class="d-none d-sm-inline-block small">Category</span>-->
-<!--            </button>-->
+            <!--            <button class="navbar-toggler ms-sm-auto mx-3 me-md-0 p-0 p-sm-2" type="button" data-bs-toggle="collapse"-->
+            <!--                    data-bs-target="#navbarCategoryCollapse" aria-controls="navbarCategoryCollapse"-->
+            <!--                    aria-expanded="false" aria-label="Toggle navigation">-->
+            <!--                <i class="bi bi-grid-3x3-gap-fill fa-fw"></i><span-->
+            <!--                    class="d-none d-sm-inline-block small">Category</span>-->
+            <!--            </button>-->
 
             <!-- Nav category menu START -->
             <div class="navbar-collapse collapse" id="navbarCategoryCollapse">
@@ -182,30 +182,24 @@
                             <div class="card-body p-0">
                                 <ul class="list-group list-group-flush list-unstyled p-2">
                                     <!-- Notification item -->
+                                    {% for notification in user.notifications.all %}
                                     <li>
                                         <a href="#"
                                            class="list-group-item list-group-item-action rounded notif-unread border-0 mb-1 p-3">
-                                            <h6 class="mb-2">New! Booking flights from New York ✈️</h6>
-                                            <p class="mb-0 small">Find the flexible ticket on flights around the world.
-                                                Start searching today</p>
-                                            <span>Wednesday</span>
+                                            <h6 class="mb-2">{{ notification.get_notification_type_display }}️</h6>
+                                            <p class="mb-0 small">{{ notification.message }}</p>
+                                            <span>{{ notification.created_at }}</span>
                                         </a>
                                     </li>
-                                    <!-- Notification item -->
-                                    <li>
-                                        <a href="#"
-                                           class="list-group-item list-group-item-action rounded border-0 mb-1 p-3">
-                                            <h6 class="mb-2">Sunshine saving are here 🌞 save 30% or more on a stay</h6>
-                                            <span>15 Nov 2022</span>
-                                        </a>
-                                    </li>
+                                    {% endfor %}
+
                                 </ul>
                             </div>
                             <!-- Card body END -->
 
                             <!-- Card footer -->
                             <div class="card-footer bg-transparent text-center border-top">
-                                <a href="#" class="btn btn-sm btn-link mb-0 p-0">See all incoming activity</a>
+                                <a href="#" class="btn btn-sm btn-link mb-0 p-0">Посмотреть все</a>
                             </div>
                         </div>
                     </div>
@@ -219,7 +213,9 @@
                     <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button"
                        data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img class="avatar-img rounded-2" src="{% if user.photo %} {{ user.photo.url }} {% else %} {% static 'website/images/user.png' %}{% endif %}" alt="avatar">
+                        <img class="avatar-img rounded-2"
+                             src="{% if user.photo %} {{ user.photo.url }} {% else %} {% static 'website/images/user.png' %}{% endif %}"
+                             alt="avatar">
                     </a>
 
                     <ul class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3"
@@ -230,11 +226,14 @@
                                 <!-- Avatar -->
                                 <div class="avatar me-3">
                                     <img class="avatar-img rounded-circle shadow"
-                                         src="{% if user.photo %} {{ user.photo.url }} {% else %} {% static 'website/images/user.png' %}{% endif %}" alt="avatar">
+                                         src="{% if user.photo %} {{ user.photo.url }} {% else %} {% static 'website/images/user.png' %}{% endif %}"
+                                         alt="avatar">
                                 </div>
                                 <div>
                                     <a class="h6 mt-2 mt-sm-0" href="#">{{ user.first_name }} {{ user.last_name }}</a>
-                                    <p class="small m-0">{% if user.email %}{{ user.email }} {% else %} <a href="#" style="color: green;">Почта не указана</a> {% endif %}</p>
+                                    <p class="small m-0">{% if user.email %}{{ user.email }} {% else %} <a href="#"
+                                                                                                           style="color: green;">Почта
+                                        не указана</a> {% endif %}</p>
                                 </div>
                             </div>
                         </li>
@@ -244,11 +243,13 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{% if user.role == 'manager' %}{% url 'managers:index' %}{% elif user.role == 'realtor' %}{% url 'realtors:index' %}{% else %}Error{% endif %}">
+                            <a class="dropdown-item"
+                               href="{% if user.role == 'manager' %}{% url 'managers:index' %}{% elif user.role == 'realtor' %}{% url 'realtors:index' %}{% else %}Error{% endif %}">
                                 <i class="bi bi-gear fa-fw me-2"></i>Аккаунт
                             </a>
                         </li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Помощь</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Помощь</a>
+                        </li>
                         <li>
                             <form action="{% url 'users:logout' %}" method="post">
                                 {% csrf_token %}
@@ -494,32 +495,48 @@ Footer END -->
     <ul class="navbar-nav">
         <!-- Nav item Home -->
         <li class="nav-item">
-            <a class="nav-link active" href="{% if user.role == 'manager' %}{% url 'managers:index' %}{% elif user.role == 'realtor' %}{% url 'realtors:index' %}{% else %}Error{% endif %}"><i class="bi bi-house-door fa-fw"></i>
+            <a class="nav-link {% if request.path == '/managers/' %} active {% elif request.path == '/realtors/' %} active {% endif %}"
+               href="{% if user.role == 'manager' %}{% url 'managers:index' %}{% elif user.role == 'realtor' %}{% url 'realtors:index' %}{% else %}Error{% endif %}"><i
+                    class="bi bi-house-door fa-fw"></i>
                 <span class="mb-0 nav-text">Главная</span>
             </a>
         </li>
 
+        {% if user.role == 'manager' %}
+
+        <li class="nav-item {% if request.path == '/managers/all-applications/' %} active {% elif request.path == '/realtors/my-applications/' %} active {% endif %}">
+            <a class="nav-link" href="{% url 'managers:all-applications' %}">
+                <i class="bi bi-briefcase fa-fw"></i>
+                <span class="mb-0 nav-text">
+                        Заявки
+                </span>
+            </a>
+        </li>
+
+        {% else %}
         <!-- Nav item My Trips -->
         <li class="nav-item">
             <a class="nav-link" href="{% url 'realtors:my-applications' %}">
                 <i class="bi bi-briefcase fa-fw"></i>
                 <span class="mb-0 nav-text">
-                    {% if user.role == 'manager' %}
-                        Заявки
-                    {% else %}
-                        Мои заявки
-                    {% endif %}
+                    Мои заявки
                 </span>
             </a>
         </li>
+        {% endif %}
 
-
+        {% if user.role == 'manager' %}
         <!-- Nav item Offer -->
         <li class="nav-item">
-            <a class="nav-link" href="#"><i class="bi bi-percent fa-fw"></i>
-                <span class="mb-0 nav-text">Оффер</span>
+            <a class="nav-link" href="{% url 'managers:accepted-application' %}">
+                <i class="bi bi-check-circle fa-fw"></i>
+                <span class="mb-0 nav-text">Принятые</span>
             </a>
         </li>
+
+        {% endif %}
+
+
 
         <!-- Nav item Account -->
         <li class="nav-item">

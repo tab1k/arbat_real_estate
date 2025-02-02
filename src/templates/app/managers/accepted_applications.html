@@ -17,16 +17,26 @@
                     <h4 class="mb-2 mb-sm-0 ms-sm-3"><span class="fw-light">{% if user.first_name %} Здравствуй,</span>
                         {{ user.first_name }} {{ user.last_name }} 👋 {% else %} <a
                                 style="color: black; font-size: 25px; text-decoration: underline;"
-                                href="{% url 'managers:settings' %}">Заполните свои данные!</a>{% endif %}</h4>
+                                href="{% url 'users:profile' %}">Заполните свои данные!</a>{% endif %}</h4>
                     <a href="{% url 'realtors:create-request' %}" class="btn btn-sm mb-0 ms-auto flex-shrink-0"
-                       style="background-color: #099642; color: white;"><i
-                            class="bi bi-plus-lg fa-fw me-2"></i>Создать заявку</a>
+                       style="background-color: #099642; color: white;"><i class="bi bi-plus-lg fa-fw me-2"></i>Создать заявку</a>
+
+                    <style>
+                        @media (max-width: 767.98px) {
+                            a.btn.btn-sm.mb-0.ms-auto.flex-shrink-0 {
+                                width: 100%;
+                            }
+                            .d-sm-flex.align-items-center {
+                                text-align: center;
+                            }
+                        }
+                    </style>
                 </div>
                 <!-- Avatar and info START -->
 
                 <!-- Responsive navbar toggler -->
                 <button class="btn btn-primary w-100 d-block d-xl-none mt-2" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#dashboardMenu" aria-controls="dashboardMenu">
+                        data-bs-target="#dashboardMenu" aria-controls="dashboardMenu" style="background-color: #099642; border: #09964">
                     <i class="bi bi-list"></i> Приборная панель
                 </button>
 
@@ -38,7 +48,7 @@
                                 data-bs-target="#dashboardMenu" aria-label="Close"></button>
                     </div>
                     <!-- Offcanvas body -->
-                    <div class="offcanvas-body p-3 p-xl-0">
+                    <div class="offcanvas-body p-3 p-xl-0" style="justify-content: center;">
                         <!-- Nav item -->
                         <div class="navbar navbar-expand-xl">
                             <ul class="navbar-nav navbar-offcanvas-menu">
@@ -57,14 +67,6 @@
                                 </li>
 
 
-                                <li class="nav-item"><a class="nav-link" href="agent-activities.html"><i
-                                        class="bi bi-bell fa-fw me-1"></i>Activities</a></li>
-
-                                <li class="nav-item"><a class="nav-link" href="agent-earnings.html"><i
-                                        class="bi bi-graph-up-arrow fa-fw me-1"></i>Earnings</a></li>
-
-                                <li class="nav-item"><a class="nav-link" href="agent-reviews.html"><i
-                                        class="bi bi-star fa-fw me-1"></i>Reviews</a></li>
 
                                 <li><a class="nav-link" href="{% url 'users:profile' %}"><i
                                         class="bi bi-gear fa-fw me-1"></i>Аккаунт</a>
@@ -95,7 +97,7 @@
             <!-- Title START -->
             <div class="row">
                 <div class="col-12">
-                    <h1 class="fs-4 mb-0"><i class="bi bi-journals fa-fw me-1"></i>Мои заявки</h1>
+                    <h1 class="fs-4 mb-0"><i class="bi bi-journals fa-fw me-1"></i>Принятые</h1>
                 </div>
             </div>
             <!-- Title END -->
@@ -153,7 +155,7 @@
                     <div class="card border">
                         <!-- Card header -->
                         <div class="card-header border-bottom">
-                            <h5 class="card-header-title">Мои заявки</h5>
+                            <h5 class="card-header-title">Мною принятые заявки</h5>
                         </div>
 
                         <!-- Card body START -->
@@ -165,7 +167,7 @@
                                 <div class="row g-4">
                                     <!-- Card img -->
                                     <div class="col-md-3 col-lg-2" style="text-align: center;">
-                                        <img src="{% static 'website/images/load.webp' %}" style="heigth: 50px; width: 50px;" class="card-img rounded-2"
+                                        <img src="{% static 'website/images/clock.webp' %}" style="heigth: 50px; width: 50px; margin-top: 15px;" class="card-img rounded-2"
                                              alt="Card image">
                                     </div>
 

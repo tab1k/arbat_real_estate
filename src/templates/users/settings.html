@@ -184,33 +184,11 @@
                                                      style="color: #099642;">{{ user.email }}</span></p>
                                         </div>
                                         <!-- Card body START -->
-                                        <form class="card-body">
-                                            <!-- Current password -->
-                                            <div class="mb-3">
-                                                <label class="form-label">Current password</label>
-                                                <input class="form-control" type="password"
-                                                       placeholder="Enter current password">
-                                            </div>
-                                            <!-- New password -->
-                                            <div class="mb-3">
-                                                <label class="form-label"> Enter new password</label>
-                                                <div class="input-group">
-                                                    <input class="form-control fakepassword" type="password"
-                                                           id="psw-input" placeholder="Enter new password">
-                                                    <span class="input-group-text p-0 bg-transparent">
-													<i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>
-												</span>
-                                                </div>
-                                            </div>
-                                            <!-- Confirm -->
-                                            <div>
-                                                <label class="form-label">Confirm new password</label>
-                                                <input class="form-control" type="password"
-                                                       placeholder="Confirm new password">
-                                            </div>
-
+                                        <form method="POST" class="card-body">
+                                            {% csrf_token %}
+                                            {{ password_form.as_p }}
                                             <div class="text-end mt-3">
-                                                <a href="#" class="btn mb-0" style="background-color: #099642; color: white;">Изменить пароль</a>
+                                                <button type="submit" name="password-change" class="btn mb-0" style="background-color: #099642; color: white;">Изменить пароль</button>
                                             </div>
                                         </form>
                                         <!-- Card body END -->

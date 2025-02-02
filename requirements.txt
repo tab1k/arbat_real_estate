@@ -3,11 +3,17 @@ argon2-cffi-bindings==21.2.0
 asgiref==3.8.1
 cffi==1.17.1
 Django==5.1.4
+django-extensions==3.2.3
 django-jazzmin==3.0.1
 django-widget-tweaks==1.5.0
 djangorestframework==3.15.2
+djangorestframework_simplejwt==5.4.0
 gunicorn==23.0.0
 packaging==24.2
 pillow==11.0.0
 pycparser==2.22
+pydotplus==2.0.2
+pygraphviz==1.14
+PyJWT==2.10.1
+pyparsing==3.2.1
 sqlparse==0.5.3

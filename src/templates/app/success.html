@@ -23,8 +23,14 @@
                     </p>
 
                     <!-- Buttons -->
+                    {% if user.role == 'manager' %}
+                    <a href="{% url 'managers:accepted-application' %}" class="btn mb-5 me-1" style="background-color: #099642; color: white;">Мои принятые заявки</a>
+                    <a href="{% url 'managers:index' %}" class="btn btn-light mb-5">Вернуться на главную</a>
+                    {% else %}
                     <a href="{% url 'realtors:my-applications' %}" class="btn mb-5 me-1" style="background-color: #099642; color: white;">Мои заявки</a>
                     <a href="{% url 'realtors:index' %}" class="btn btn-light mb-5">Вернуться на главную</a>
+                    {% endif %}
+
                 </div>
             </div>
         </div>

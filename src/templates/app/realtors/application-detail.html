@@ -1,0 +1,310 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<main>
+    <section class="pt-4">
+        <div class="container">
+            <div class="card rounded-3 border p-3 pb-2">
+                <!-- Avatar and info START -->
+                <div class="d-sm-flex align-items-center">
+                    <div class="avatar avatar-xl mb-2 mb-sm-0">
+                        <img class="avatar-img rounded-circle"
+                             src="{% if user.photo %} {{ user.photo.url }} {% else %} {% static 'website/images/user.png' %}{% endif %}"
+                             alt="">
+                    </div>
+                    <h4 class="mb-2 mb-sm-0 ms-sm-3"><span class="fw-light">{% if user.first_name %} Здравствуй,</span>
+                        {{ user.first_name }} {{ user.last_name }} 👋 {% else %} <a
+                                style="color: black; font-size: 25px; text-decoration: underline;"
+                                href="{% url 'users:profile' %}">Заполните свои данные!</a>{% endif %}</h4>
+                    <a href="{% url 'realtors:create-request' %}" class="btn btn-sm mb-0 ms-auto flex-shrink-0"
+                       style="background-color: #099642; color: white;"><i
+                            class="bi bi-plus-lg fa-fw me-2"></i>Создать заявку</a>
+
+                    <style>
+                        @media (max-width: 767.98px) {
+                            a.btn.btn-sm.mb-0.ms-auto.flex-shrink-0 {
+                                width: 100%;
+                            }
+                            .d-sm-flex.align-items-center {
+                                text-align: center;
+                            }
+                        }
+                    </style>
+
+                </div>
+                <!-- Avatar and info START -->
+
+                <!-- Responsive navbar toggler -->
+                <button class="btn w-100 d-block d-xl-none mt-2" style="background-color: #099642; color: white;"
+                        type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#dashboardMenu" aria-controls="dashboardMenu">
+                    <i class="bi bi-list"></i> Приборная панель
+                </button>
+
+                <!-- Nav links START -->
+                <div class="offcanvas-xl offcanvas-end mt-xl-3" tabindex="-1" id="dashboardMenu">
+                    <div class="offcanvas-header border-bottom p-3">
+                        <h5 class="offcanvas-title">Меню</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                data-bs-target="#dashboardMenu" aria-label="Close"></button>
+                    </div>
+                    <!-- Offcanvas body -->
+                    <div class="offcanvas-body p-3 p-xl-0" style="justify-content: center;">
+                        <!-- Nav item -->
+                        <div class="navbar navbar-expand-xl">
+                            <ul class="navbar-nav navbar-offcanvas-menu">
+
+                                <li class="nav-item"><a class="nav-link" href="{% url 'realtors:index' %}"><i
+                                        class="bi bi-house-door fa-fw me-1"></i>Приборная панель</a></li>
+
+                                <li class="nav-item"><a class="nav-link active"
+                                                        href="{% url 'realtors:my-applications' %}"><i
+                                        class="bi bi-journals fa-fw me-1"></i>Мои заявки</a></li>
+
+                                <!--                                <li class="nav-item"><a class="nav-link" href="agent-bookings.html"><i-->
+                                <!--                                        class="bi bi-bookmark-heart fa-fw me-1"></i>Bookings</a></li>-->
+
+                                <li class="nav-item"><a class="nav-link" href="#"><i
+                                        class="bi bi-bell fa-fw me-1"></i>Помощь</a></li>
+
+                                <!--                                <li class="nav-item"><a class="nav-link" href="agent-earnings.html"><i-->
+                                <!--                                        class="bi bi-graph-up-arrow fa-fw me-1"></i>Earnings</a></li>-->
+
+                                <!--                                <li class="nav-item"><a class="nav-link" href="agent-reviews.html"><i-->
+                                <!--                                        class="bi bi-star fa-fw me-1"></i>Reviews</a></li>-->
+
+                                <li><a class="nav-link" href="{% url 'users:profile' %}"><i
+                                        class="bi bi-gear fa-fw me-1"></i>Аккаунт</a>
+                                </li>
+
+                                <!--                                <li class="nav-item dropdown">-->
+                                <!--                                    <a class="nav-link dropdown-toggle" href="#" id="dropdoanMenu"-->
+                                <!--                                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                <!--                                        <i class="bi bi-list-ul fa-fw me-1"></i>Dropdown-->
+                                <!--                                    </a>-->
+                                <!--                                    <ul class="dropdown-menu" aria-labelledby="dropdoanMenu">-->
+                                <!--                                        &lt;!&ndash; Dropdown menu &ndash;&gt;-->
+                                <!--                                        <li><a class="dropdown-item" href="#">Item 1</a></li>-->
+                                <!--                                        <li><a class="dropdown-item" href="#">Item 2</a></li>-->
+                                <!--                                    </ul>-->
+                                <!--                                </li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Nav links END -->
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================
+    Content START -->
+    <section class="pt-0">
+        <div class="container vstack gap-4">
+            <!-- Title START -->
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="fs-4 mb-0"><i class="bi bi-gear fa-fw me-1"></i>Заявка № {{ application.id }}</h1>
+                </div>
+            </div>
+            <!-- Title END -->
+
+            <!-- Tabs START -->
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="bg-light pb-0 px-2 px-lg-0 rounded-top">
+                        <ul class="nav nav-tabs nav-bottom-line nav-responsive border-0 nav-justified" role="tablist">
+                            <li class="nav-item" role="presentation"><a class="nav-link mb-0 active"
+                                                                        data-bs-toggle="tab" href="#tab-1"
+                                                                        aria-selected="true" role="tab"><i
+                                    class="fas fa-cog fa-fw me-2"></i>Детали заявки</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link mb-0" data-bs-toggle="tab"
+                                                                        href="#tab-2" aria-selected="false"
+                                                                        tabindex="-1" role="tab"><i
+                                    class="fas fa-bell fa-fw me-2"></i>Данные о риэлторе</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Tabs END -->
+
+            <!-- Tabs Content START -->
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="tab-content">
+                        <!-- Tab content 1 START -->
+                        <div class="tab-pane show active" id="tab-1" role="tabpanel">
+                            <div class="row g-4">
+                                <!-- Edit profile START -->
+                                <div class="col-12">
+                                    <div class="card border">
+                                        <div class="card-header border-bottom">
+                                            <h5 class="card-header-title">Информация</h5>
+                                        </div>
+                                        <form method="post" enctype="multipart/form-data" class="card-body">
+                                            <input type="hidden" name="csrfmiddlewaretoken"
+                                                   value="YlkqnyLQpkmXmxKAA1bnBrfGGC0nSXFxDxTa1Jb1ZPH8CnYuB9avaFdWXm6AeaDF">
+
+                                            <!-- First Name -->
+                                            <label class="form-label">Имя</label>
+                                            <input type="text" value="{{ application.full_name }}" maxlength="150"
+                                                   class="form-control" readonly>
+
+                                            <label class="form-label">Номер телефона</label>
+                                            <input type="text" value="{{ application.phone_number }}" maxlength="150"
+                                                   class="form-control" readonly>
+
+                                            <label class="form-label">ИИН</label>
+                                            <input value="{{ application.iin }}" maxlength="254"
+                                                   class="form-control" readonly>
+
+                                            <label class="form-label">Город</label>
+                                            <input type="text" value="{{ application.city }}" maxlength="150"
+                                                   class="form-control" readonly>
+
+                                            <label class="form-label">Сумма ипотеки</label>
+                                            <input type="text" value="{{ application.amount }}" maxlength="254"
+                                                   class="form-control" readonly>
+
+                                            <label class="form-label">Первоначальный взнос</label>
+                                            <input type="text" value="{{ application.down_payment }}" maxlength="254"
+                                                   class="form-control" readonly>
+
+                                            <label class="form-label">Срок ипотеки</label>
+                                            <input type="text" value="{{ application.mortgage_term }}" maxlength="254"
+                                                   class="form-control" readonly>
+
+                                            <label class="form-label">Время</label>
+                                            <input type="text" name="phone_number" value="{{ application.created_at }}"
+                                                   maxlength="25"
+                                                   class="form-control" readonly>
+
+                                            <!-- application-detail.html для Риэлтора -->
+
+                                            {% if request.user == application.realtor and application.code_requested %}
+                                            <hr style="margin-top: 30px">
+                                            <form id="submitCodeForm" method="post">
+                                                {% csrf_token %}
+                                                <label class="form-label">Введите код</label>
+                                                <input type="text" id="codeInput" name="code" class="form-control" value="{{ application.code }}"
+                                                       required>
+                                                {% if application.code %}
+                                                <button type="submit" class="btn btn-primary mt-2" style="background-color: #099642; border: #099642;">Изменить
+                                                </button>
+                                                {% else %}
+                                                <button type="submit" class="btn btn-primary mt-2" style="background-color: #099642; border: #099642;">Подтвердить код
+                                                </button>
+                                                {% endif %}
+                                            </form>
+                                            {% endif %}
+
+
+                                        </form>
+                                        <style>
+                                            label.form-label {
+                                                margin-bottom: 0;
+                                                margin-top: 5px;
+                                            }
+                                        </style>
+                                    </div>
+                                </div>
+                                <!-- Edit profile END -->
+
+
+                            </div>
+                        </div>
+                        <!-- Tab content 1 END -->
+
+                        <!-- Tab content 2 START -->
+                        <div class="tab-pane" id="tab-2" role="tabpanel">
+                            <div class="row g-4">
+                                <div class="col-12">
+                                    <div class="tab-content">
+                                        <!-- Tab content 1 START -->
+                                        <div class="tab-pane active show" id="tab-1" role="tabpanel">
+                                            <div class="row g-4">
+                                                <!-- Edit profile START -->
+                                                <div class="col-12">
+                                                    <div class="card border">
+                                                        <div class="card-header border-bottom">
+                                                            <h5 class="card-header-title">Информация</h5>
+                                                        </div>
+                                                        <div style="text-align: center; margin-top: 30px;">
+                                                            <img style="height: 100px; width: 100px; border-radius: 50%; margin-bottom: 10px;"
+                                                                 src="{% if application.realtor.photo %} {{ application.realtor.photo.url }} {% else %} {% static 'images/user.png' %} {% endif %}"
+                                                                 alt="">
+                                                        </div>
+
+
+                                                        <form method="post" enctype="multipart/form-data"
+                                                              class="card-body" style="padding-top: 0px;">
+
+                                                            <!-- First Name -->
+
+                                                            <label class="form-label">ФИО</label>
+                                                            <input type="text"
+                                                                   value="{{ application.realtor.first_name }} {{ application.realtor.first_name }}"
+                                                                   maxlength="150" class="form-control" readonly>
+
+                                                            <label class="form-label">Номер телефона</label>
+                                                            <input type="text"
+                                                                   value="{{ application.realtor.phone_number }}"
+                                                                   maxlength="150"
+                                                                   class="form-control" readonly>
+
+                                                            <label class="form-label">Email</label>
+                                                            <input value="{{ application.realtor.email }}"
+                                                                   maxlength="254"
+                                                                   class="form-control" readonly>
+
+                                                            <label class="form-label">Дата рождения</label>
+                                                            <input type="text"
+                                                                   value="{{ application.realtor.date_of_birth }}"
+                                                                   maxlength="150"
+                                                                   class="form-control" readonly>
+
+
+                                                            <hr style="margin-top: 30px">
+
+                                                            <div style="text-align: center;">
+                                                                <a type="tel" class="btn btn-primary"
+                                                                   href="tel:{{ application.realtor.phone_number }}"
+                                                                   style="background-color: #099642; color: white; border-color: green;">
+                                                                    📞 Связаться
+                                                                </a>
+                                                            </div>
+
+                                                        </form>
+                                                        <style>
+                                                            label.form-label {
+                                                                margin-bottom: 0;
+                                                                margin-top: 5px;
+                                                            }
+                                                        </style>
+                                                    </div>
+                                                </div>
+                                                <!-- Edit profile END -->
+
+
+                                            </div>
+                                        </div>
+                                        <!-- Tab content 1 END -->
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tab content 2 END -->
+                    </div>
+                </div>
+            </div>
+            <!-- Tabs Content END -->
+        </div>
+    </section>
+    <!-- =======================
+    Content END -->
+</main>
+{% endblock %}

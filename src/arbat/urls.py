@@ -10,6 +10,7 @@ urlpatterns = [
     path('managers/', include('managers.urls')),
     path('realtors/', include('realtors.urls')),
     path('applications/', include('applications.urls')),
+    path('notifications/', include('notifications.urls')),
 ]
 
 if settings.DEBUG:

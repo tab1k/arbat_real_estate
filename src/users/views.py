@@ -11,6 +11,11 @@ from .forms import *
 from django.views.generic.edit import FormView, UpdateView
 
 from django.urls import reverse_lazy
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
 
@@ -66,6 +71,23 @@ class CustomUserUpdateView(UpdateView):
     def form_valid(self, form):
         # Здесь можно добавить дополнительные действия перед сохранением формы
         return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        # Обработка смены пароля, если была отправлена форма
+        if 'password-change' in request.POST:
+            password_form = PasswordChangeForm(user=request.user, data=request.POST)
+            if password_form.is_valid():
+                user = request.user
+                user.set_password(password_form.cleaned_data['new_password'])
+                user.save()
+                update_session_auth_hash(request, user)  # Обновляем сессию, чтобы пользователь не вышел из системы
+                messages.success(request, 'Ваш пароль был успешно изменен!')
+                return redirect('users:profile')  # Перенаправляем на профиль пользователя после изменения пароля
+        else:
+            password_form = PasswordChangeForm(user=request.user)
+
+        # Явно передаем обе формы в контекст шаблона
+        return self.render_to_response(self.get_context_data(form=self.get_form(), password_form=password_form))
 
 
 

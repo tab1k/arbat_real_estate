@@ -7,6 +7,7 @@ from .forms import MortgageApplicationForm
 from django.views.generic import TemplateView, ListView
 
 
+
 class MortgageApplicationCreateView(LoginRequiredMixin, CreateView):
     model = MortgageApplication
     form_class = MortgageApplicationForm
@@ -65,3 +66,5 @@ class MyApplicationsView(BaseApplicationsView):
 
     def filter_queryset(self, queryset):
         return queryset.filter(realtor=self.request.user, realtor__role='realtor').order_by('-created_at')
+
+

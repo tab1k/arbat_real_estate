@@ -19,16 +19,28 @@
                     <h4 class="mb-2 mb-sm-0 ms-sm-3"><span class="fw-light">{% if user.first_name %} Здравствуй,</span>
                         {{ user.first_name }} {{ user.last_name }} 👋 {% else %} <a
                                 style="color: black; font-size: 25px; text-decoration: underline;"
-                                href="{% url 'managers:settings' %}">Заполните свои данные!</a>{% endif %}</h4>
+                                href="{% url 'users:profile' %}">Заполните свои данные!</a>{% endif %}</h4>
                     <a href="{% url 'realtors:create-request' %}" class="btn btn-sm mb-0 ms-auto flex-shrink-0"
-                       style="background-color: #099642; color: white;"><i
-                            class="bi bi-plus-lg fa-fw me-2"></i>Создать заявку</a>
+                       style="background-color: #099642; color: white;"><i class="bi bi-plus-lg fa-fw me-2"></i>Создать
+                        заявку</a>
+
+                    <style>
+                        @media (max-width: 767.98px) {
+                            a.btn.btn-sm.mb-0.ms-auto.flex-shrink-0 {
+                                width: 100%;
+                            }
+                            .d-sm-flex.align-items-center {
+                                text-align: center;
+                            }
+                        }
+                    </style>
                 </div>
                 <!-- Avatar and info START -->
 
                 <!-- Responsive navbar toggler -->
                 <button class="btn btn-primary w-100 d-block d-xl-none mt-2" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#dashboardMenu" aria-controls="dashboardMenu">
+                        data-bs-target="#dashboardMenu" aria-controls="dashboardMenu"
+                        style="background-color: #099642; border: #09964">
                     <i class="bi bi-list"></i> Приборная панель
                 </button>
 
@@ -40,7 +52,7 @@
                                 data-bs-target="#dashboardMenu" aria-label="Close"></button>
                     </div>
                     <!-- Offcanvas body -->
-                    <div class="offcanvas-body p-3 p-xl-0">
+                    <div class="offcanvas-body p-3 p-xl-0" style="justify-content: center;">
                         <!-- Nav item -->
                         <div class="navbar navbar-expand-xl">
                             <ul class="navbar-nav navbar-offcanvas-menu">
@@ -52,21 +64,13 @@
                                                         href="{% url 'managers:all-applications'  %}"><i
                                         class="bi bi-journals fa-fw me-1"></i>Заявки</a></li>
 
+                                {% if user.role == 'manager' %}
                                 <li class="nav-item">
                                     <a class="nav-link active" href="{% url 'managers:accepted-application' %}">
                                         <i class="bi bi-star fa-fw me-1"></i>Принятые
                                     </a>
                                 </li>
-
-
-                                <li class="nav-item"><a class="nav-link" href="agent-activities.html"><i
-                                        class="bi bi-bell fa-fw me-1"></i>Activities</a></li>
-
-                                <li class="nav-item"><a class="nav-link" href="agent-earnings.html"><i
-                                        class="bi bi-graph-up-arrow fa-fw me-1"></i>Earnings</a></li>
-
-                                <li class="nav-item"><a class="nav-link" href="agent-reviews.html"><i
-                                        class="bi bi-star fa-fw me-1"></i>Reviews</a></li>
+                                {% endif %}
 
                                 <li><a class="nav-link" href="{% url 'users:profile' %}"><i
                                         class="bi bi-gear fa-fw me-1"></i>Аккаунт</a>
@@ -145,50 +149,76 @@
                                             <!-- First Name -->
                                             <label class="form-label">Имя</label>
                                             <input type="text" value="{{ application.full_name }}" maxlength="150"
-                                                   class="form-control">
+                                                   class="form-control" readonly>
 
                                             <label class="form-label">Номер телефона</label>
                                             <input type="text" value="{{ application.phone_number }}" maxlength="150"
-                                                   class="form-control">
+                                                   class="form-control" readonly>
 
                                             <label class="form-label">ИИН</label>
                                             <input value="{{ application.iin }}" maxlength="254"
-                                                   class="form-control">
+                                                   class="form-control" readonly>
 
                                             <label class="form-label">Город</label>
                                             <input type="text" value="{{ application.city }}" maxlength="150"
-                                                   class="form-control">
+                                                   class="form-control" readonly>
 
                                             <label class="form-label">Сумма ипотеки</label>
                                             <input type="text" value="{{ application.amount }}" maxlength="254"
-                                                   class="form-control">
+                                                   class="form-control" readonly>
 
                                             <label class="form-label">Первоначальный взнос</label>
                                             <input type="text" value="{{ application.down_payment }}" maxlength="254"
-                                                   class="form-control">
+                                                   class="form-control" readonly>
 
                                             <label class="form-label">Срок ипотеки</label>
                                             <input type="text" value="{{ application.mortgage_term }}" maxlength="254"
-                                                   class="form-control">
+                                                   class="form-control" readonly>
 
                                             <label class="form-label">Время</label>
                                             <input type="text" name="phone_number" value="{{ application.created_at }}"
                                                    maxlength="25"
-                                                   class="form-control" required="" id="id_phone_number">
+                                                   class="form-control" readonly>
 
+
+                                            {% if request.user == application.manager %}
                                             <hr style="margin-top: 30px">
-
-                                            <label class="form-label">Код</label>
-                                            <input type="text" value="" maxlength="254"
-                                                   class="form-control">
-
-
-                                            <div class="text-end mt-3">
-                                                <button type="submit" class="btn mb-0"
-                                                        style="background-color: #099642; color: white;">Сохранить
-                                                    изменения
+                                            <div style="position: relative; display: inline-block; width: 100%;">
+                                                <label class="form-label">Код</label>
+                                                <input type="text" id="codeInput" value="{% if application.code %} {{ application.code }} {% endif %}"
+                                                       maxlength="254" class="form-control"
+                                                       style="padding-right: 120px; height: 38px;" readonly>
+                                                <button type="button" class="btn btn-primary " {% if application.code_requested %}disabled{% endif %} id="requestCodeBtn"
+                                                        style="background-color: green; border: green; position: absolute; right: 0; top: 72%; transform: translateY(-50%); height: 43px; border-radius: 10px;">
+                                                    Запросить код
                                                 </button>
                                             </div>
+
+
+                                            {% endif %}
+
+                                            <script>
+                                                function getCSRFToken() {
+                                                    let csrfToken = document.cookie.match(/csrftoken=([^ ;]+)/);
+                                                    return csrfToken ? csrfToken[1] : "";
+                                                }
+
+                                                document.getElementById("requestCodeBtn")?.addEventListener("click", function () {
+                                                    fetch("{% url 'managers:request-code' application.pk %}", {
+                                                        method: "POST",
+                                                        headers: {
+                                                            "X-CSRFToken": getCSRFToken(),
+                                                            "Content-Type": "application/json"
+                                                        }
+                                                    }).then(response => response.json())
+                                                      .then(data => {
+                                                          alert(data.message);
+                                                          location.reload();  // Обновить страницу после успешного запроса
+                                                      }).catch(error => console.error("Ошибка:", error));
+                                                });
+                                            </script>
+
+
                                         </form>
                                         <style>
                                             label.form-label {
@@ -219,60 +249,50 @@
                                                         <div class="card-header border-bottom">
                                                             <h5 class="card-header-title">Информация</h5>
                                                         </div>
+                                                        <div style="text-align: center; margin-top: 30px;">
+                                                            <img style="height: 100px; width: 100px; border-radius: 50%; margin-bottom: 10px;"
+                                                                 src="{% if application.realtor.photo %} {{ application.realtor.photo.url }} {% else %} {% static 'images/user.png' %} {% endif %}" alt="">
+                                                        </div>
+
+
                                                         <form method="post" enctype="multipart/form-data"
-                                                              class="card-body">
-                                                            <input type="hidden" name="csrfmiddlewaretoken"
-                                                                   value="YlkqnyLQpkmXmxKAA1bnBrfGGC0nSXFxDxTa1Jb1ZPH8CnYuB9avaFdWXm6AeaDF">
+                                                              class="card-body" style="padding-top: 0px;">
 
                                                             <!-- First Name -->
-                                                            <label class="form-label">Имя</label>
-                                                            <input type="text" value="Баяхметов"
-                                                                   maxlength="150" class="form-control">
+
+                                                            <label class="form-label">ФИО</label>
+                                                            <input type="text"
+                                                                   value="{{ application.realtor.first_name }} {{ application.realtor.first_name }}"
+                                                                   maxlength="150" class="form-control" readonly>
 
                                                             <label class="form-label">Номер телефона</label>
-                                                            <input type="text" value="+77077772817" maxlength="150"
-                                                                   class="form-control">
+                                                            <input type="text"
+                                                                   value="{{ application.realtor.phone_number }}"
+                                                                   maxlength="150"
+                                                                   class="form-control" readonly>
 
-                                                            <label class="form-label">ИИН</label>
-                                                            <input value="11228551438" maxlength="254"
-                                                                   class="form-control">
+                                                            <label class="form-label">Email</label>
+                                                            <input value="{{ application.realtor.email }}"
+                                                                   maxlength="254"
+                                                                   class="form-control" readonly>
 
-                                                            <label class="form-label">Город</label>
-                                                            <input type="text" value="Астана" maxlength="150"
-                                                                   class="form-control">
+                                                            <label class="form-label">Дата рождения</label>
+                                                            <input type="text"
+                                                                   value="{{ application.realtor.date_of_birth }}"
+                                                                   maxlength="150"
+                                                                   class="form-control" readonly>
 
-                                                            <label class="form-label">Сумма ипотеки</label>
-                                                            <input type="text" value="10000000,00" maxlength="254"
-                                                                   class="form-control">
-
-                                                            <label class="form-label">Первоначальный взнос</label>
-                                                            <input type="text" value="2000000,00" maxlength="254"
-                                                                   class="form-control">
-
-                                                            <label class="form-label">Срок ипотеки</label>
-                                                            <input type="text" value="12" maxlength="254"
-                                                                   class="form-control">
-
-                                                            <label class="form-label">Время</label>
-                                                            <input type="text" name="phone_number"
-                                                                   value="3 января 2025 г. 5:06" maxlength="25"
-                                                                   class="form-control" required=""
-                                                                   id="id_phone_number">
 
                                                             <hr style="margin-top: 30px">
 
-                                                            <label class="form-label">Код</label>
-                                                            <input type="text" value="" maxlength="254"
-                                                                   class="form-control">
-
-
-                                                            <div class="text-end mt-3">
-                                                                <button type="submit" class="btn mb-0"
-                                                                        style="background-color: #099642; color: white;">
-                                                                    Сохранить
-                                                                    изменения
-                                                                </button>
+                                                            <div style="text-align: center;">
+                                                                <a type="tel" class="btn btn-primary"
+                                                                   href="tel:{{ application.realtor.phone_number }}"
+                                                                   style="background-color: #099642; color: white; border-color: green;">
+                                                                    📞 Связаться
+                                                                </a>
                                                             </div>
+
                                                         </form>
                                                         <style>
                                                             label.form-label {
@@ -289,132 +309,7 @@
                                         </div>
                                         <!-- Tab content 1 END -->
 
-                                        <!-- Tab content 2 START -->
-                                        <div class="tab-pane" id="tab-2" role="tabpanel">
-                                            <div class="card border mb-4">
-                                                <!-- Card header -->
-                                                <div class="card-header bg-transparent border-bottom">
-                                                    <h5 class="card-header-title">Notification Settings</h5>
-                                                    <p class="mb-0">Figure what you want to be notified about, and
-                                                        unsubscribe from what
-                                                        you don't.</p>
-                                                </div>
 
-                                                <!-- Form START -->
-                                                <form class="card-body">
-                                                    <!-- Radio -->
-                                                    <div class="mb-4">
-                                                        <label class="form-label">Newsletter *</label>
-                                                        <div class="d-flex gap-4 flex-wrap">
-                                                            <div class="form-check radio-bg-light">
-                                                                <input class="form-check-input" type="radio"
-                                                                       name="flexRadioDefault" id="flexRadioDaily"
-                                                                       checked="">
-                                                                <label class="form-check-label" for="flexRadioDaily">
-                                                                    Daily
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check radio-bg-light">
-                                                                <input class="form-check-input" type="radio"
-                                                                       name="flexRadioDefault" id="flexRadioDefault2">
-                                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                                    Twice a week
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check radio-bg-light">
-                                                                <input class="form-check-input" type="radio"
-                                                                       name="flexRadioDefault" id="flexRadioDefault3">
-                                                                <label class="form-check-label" for="flexRadioDefault3">
-                                                                    Weekly
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check radio-bg-light">
-                                                                <input class="form-check-input" type="radio"
-                                                                       name="flexRadioDefault" id="flexRadioDefault4">
-                                                                <label class="form-check-label" for="flexRadioDefault4">
-                                                                    Never
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Switch -->
-                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
-                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy1">Notify
-                                                            me via
-                                                            email when logging in</label>
-                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
-                                                               id="checkPrivacy1" checked="">
-                                                    </div>
-
-                                                    <!-- Switch -->
-                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
-                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy2">I
-                                                            would like to
-                                                            receive booking assist reminders</label>
-                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
-                                                               id="checkPrivacy2" checked="">
-                                                    </div>
-
-                                                    <!-- Switch -->
-                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
-                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy3">I
-                                                            would like to
-                                                            receive emails about Booking promotions</label>
-                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
-                                                               id="checkPrivacy3" checked="">
-                                                    </div>
-
-                                                    <!-- Switch -->
-                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
-                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy7">I
-                                                            would like to
-                                                            know about information and offers related to my upcoming
-                                                            trip</label>
-                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
-                                                               id="checkPrivacy7" checked="">
-                                                    </div>
-
-                                                    <!-- Switch -->
-                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
-                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy4">Show
-                                                            your profile
-                                                            publicly</label>
-                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
-                                                               id="checkPrivacy4">
-                                                    </div>
-
-                                                    <!-- Switch -->
-                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
-                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy6">Send
-                                                            SMS
-                                                            confirmation for all online payments</label>
-                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
-                                                               id="checkPrivacy6">
-                                                    </div>
-
-                                                    <!-- Switch -->
-                                                    <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
-                                                        <label class="form-check-label ps-0 pe-4" for="checkPrivacy5">Check
-                                                            which
-                                                            device(s) access your account</label>
-                                                        <input class="form-check-input flex-shrink-0" type="checkbox"
-                                                               id="checkPrivacy5" checked="">
-                                                    </div>
-
-                                                    <!-- Button -->
-                                                    <div class="d-sm-flex justify-content-end">
-                                                        <button type="button" class="btn btn-sm btn-primary me-2 mb-0">
-                                                            Save changes
-                                                        </button>
-                                                        <a href="#"
-                                                           class="btn btn-sm btn-outline-secondary mb-0">Cancel</a>
-                                                    </div>
-                                                </form>
-                                                <!-- Form END -->
-                                            </div>
-                                        </div>
-                                        <!-- Tab content 2 END -->
                                     </div>
                                 </div>
                             </div>

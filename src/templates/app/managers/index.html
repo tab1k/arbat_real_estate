@@ -20,16 +20,28 @@
                     <h4 class="mb-2 mb-sm-0 ms-sm-3"><span class="fw-light">{% if user.first_name %} Здравствуй,</span>
                         {{ user.first_name }} {{ user.last_name }} 👋 {% else %} <a
                                 style="color: black; font-size: 25px; text-decoration: underline;"
-                                href="{% url 'managers:settings' %}">Заполните свои данные!</a>{% endif %}</h4>
+                                href="{% url 'users:profile' %}">Заполните свои данные!</a>{% endif %}</h4>
                     <a href="{% url 'realtors:create-request' %}" class="btn btn-sm mb-0 ms-auto flex-shrink-0"
-                       style="background-color: #099642; color: white;"><i
-                            class="bi bi-plus-lg fa-fw me-2"></i>Создать заявку</a>
+                       style="background-color: #099642; color: white;"><i class="bi bi-plus-lg fa-fw me-2"></i>Создать
+                        заявку</a>
+
+                    <style>
+                        @media (max-width: 767.98px) {
+                            a.btn.btn-sm.mb-0.ms-auto.flex-shrink-0 {
+                                width: 100%;
+                            }
+                            .d-sm-flex.align-items-center {
+                                text-align: center;
+                            }
+                        }
+                    </style>
                 </div>
                 <!-- Avatar and info START -->
 
                 <!-- Responsive navbar toggler -->
                 <button class="btn btn-primary w-100 d-block d-xl-none mt-2" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#dashboardMenu" aria-controls="dashboardMenu">
+                        data-bs-target="#dashboardMenu" aria-controls="dashboardMenu"
+                        style="background-color: #099642; border: #09964;">
                     <i class="bi bi-list"></i> Приборная панель
                 </button>
 
@@ -41,7 +53,7 @@
                                 data-bs-target="#dashboardMenu" aria-label="Close"></button>
                     </div>
                     <!-- Offcanvas body -->
-                    <div class="offcanvas-body p-3 p-xl-0">
+                    <div class="offcanvas-body p-3 p-xl-0" style="justify-content: center;">
                         <!-- Nav item -->
                         <div class="navbar navbar-expand-xl">
                             <ul class="navbar-nav navbar-offcanvas-menu">
@@ -53,17 +65,12 @@
                                                         href="{% url 'managers:all-applications'  %}"><i
                                         class="bi bi-journals fa-fw me-1"></i>Заявки</a></li>
 
-                                <li class="nav-item"><a class="nav-link" href="{% url 'managers:accepted-application' %}"><i
+                                {% if user.role == 'manager' %}
+                                <li class="nav-item"><a class="nav-link"
+                                                        href="{% url 'managers:accepted-application' %}"><i
                                         class="bi bi-star fa-fw me-1"></i>Принятые</a></li>
+                                {% endif %}
 
-                                <li class="nav-item"><a class="nav-link" href="agent-activities.html"><i
-                                        class="bi bi-bell fa-fw me-1"></i>Activities</a></li>
-
-                                <li class="nav-item"><a class="nav-link" href="agent-earnings.html"><i
-                                        class="bi bi-graph-up-arrow fa-fw me-1"></i>Earnings</a></li>
-
-                                <li class="nav-item"><a class="nav-link" href="agent-reviews.html"><i
-                                        class="bi bi-star fa-fw me-1"></i>Reviews</a></li>
 
                                 <li><a class="nav-link" href="{% url 'users:profile' %}"><i
                                         class="bi bi-gear fa-fw me-1"></i>Аккаунт</a>
@@ -140,39 +147,6 @@
                     </div>
                 </div>
 
-                <!-- Counter item -->
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body border">
-                        <div class="d-flex align-items-center">
-                            <!-- Icon -->
-                            <div class="icon-xl bg-warning rounded-3 text-white">
-                                <i class="bi bi-bar-chart-line-fill"></i>
-                            </div>
-                            <!-- Content -->
-                            <div class="ms-3">
-                                <h4>15K</h4>
-                                <span>Visitors</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Counter item -->
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body border">
-                        <div class="d-flex align-items-center">
-                            <!-- Icon -->
-                            <div class="icon-xl bg-primary rounded-3 text-white">
-                                <i class="bi bi-star"></i>
-                            </div>
-                            <!-- Content -->
-                            <div class="ms-3">
-                                <h4>12K</h4>
-                                <span>Total Reviews</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- Counter END -->
 
@@ -184,7 +158,8 @@
                         <div class="card-header border-bottom">
                             <div class="d-sm-flex justify-content-between align-items-center">
                                 <h5 class="mb-2 mb-sm-0">Заявки</h5>
-                                <a href="#" class="btn btn-sm mb-0" style="background-color: #099642; color: white;">Посмотреть
+                                <a href="{% url 'managers:all-applications' %}" class="btn btn-sm mb-0"
+                                   style="background-color: #099642; color: white;">Посмотреть
                                     все</a>
                             </div>
                         </div>
@@ -194,68 +169,55 @@
                         <div class="card-body">
                             <!-- Search and select START -->
                             <div class="row g-3 align-items-center justify-content-between mb-3">
-                                <!-- Search -->
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <form class="rounded position-relative">
-                                        <input class="form-control pe-5" type="search" placeholder="Искать"
-                                               aria-label="Search">
+                                        <input id="search-input" class="form-control pe-5" type="search"
+                                               placeholder="Искать" aria-label="Искать">
                                         <button class="btn border-0 px-3 py-0 position-absolute top-50 end-0 translate-middle-y"
-                                                type="submit"><i class="fas fa-search fs-6"></i></button>
+                                                type="submit">
+                                            <i class="fas fa-search fs-6"></i>
+                                        </button>
                                     </form>
+                                    <ul id="search-results" class="list-group mt-2" style="display: none;"></ul>
                                 </div>
 
-                                <!-- Select option -->
-                                <div class="col-md-3">
-                                    <!-- Short by filter -->
-                                    <form>
-                                        <div class="choices" data-type="select-one" tabindex="0" role="listbox"
-                                             aria-haspopup="true" aria-expanded="false">
-                                            <!--                                            <div class="choices__inner"><select-->
-                                            <!--                                                    class="form-select js-choice choices__input"-->
-                                            <!--                                                    aria-label=".form-select-sm" hidden="" tabindex="-1"-->
-                                            <!--                                                    data-choice="active">-->
-                                            <!--                                                <option value="" data-custom-properties="[object Object]">Sort by-->
-                                            <!--                                                </option>-->
-                                            <!--                                            </select>-->
-                                            <!--                                                <div class="choices__list choices__list&#45;&#45;single">-->
-                                            <!--                                                    <div class="choices__item choices__placeholder choices__item&#45;&#45;selectable"-->
-                                            <!--                                                         data-item="" data-id="1" data-value=""-->
-                                            <!--                                                         data-custom-properties="[object Object]" aria-selected="true">-->
-                                            <!--                                                        Sort by-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </div>-->
-                                            <!--                                            </div>-->
-                                            <div class="choices__list choices__list--dropdown" aria-expanded="false">
-                                                <div class="choices__list" role="listbox">
-                                                    <div id="choices--dlr3-item-choice-1"
-                                                         class="choices__item choices__item--choice is-selected choices__placeholder choices__item--selectable is-highlighted"
-                                                         role="option" data-choice="" data-id="1" data-value=""
-                                                         data-select-text="Press to select" data-choice-selectable=""
-                                                         aria-selected="true">Sort by
-                                                    </div>
-                                                    <div id="choices--dlr3-item-choice-2"
-                                                         class="choices__item choices__item--choice choices__item--selectable"
-                                                         role="option" data-choice="" data-id="2" data-value="Free"
-                                                         data-select-text="Press to select" data-choice-selectable="">
-                                                        Free
-                                                    </div>
-                                                    <div id="choices--dlr3-item-choice-3"
-                                                         class="choices__item choices__item--choice choices__item--selectable"
-                                                         role="option" data-choice="" data-id="3" data-value="Newest"
-                                                         data-select-text="Press to select" data-choice-selectable="">
-                                                        Newest
-                                                    </div>
-                                                    <div id="choices--dlr3-item-choice-4"
-                                                         class="choices__item choices__item--choice choices__item--selectable"
-                                                         role="option" data-choice="" data-id="4" data-value="Oldest"
-                                                         data-select-text="Press to select" data-choice-selectable="">
-                                                        Oldest
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                <script>
+                                    document.getElementById('search-input').addEventListener('input', function() {
+                                    const query = this.value;
+                                    const resultsContainer = document.getElementById('search-results');
+
+                                    if (query.length > 0) {
+                                        fetch('/managers/search-applications/?q=' + query)
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                resultsContainer.innerHTML = '';
+                                                resultsContainer.style.display = 'block';
+
+                                                if (data.length > 0) {
+                                                    data.forEach(application => {
+                                                        const item = document.createElement('li');
+                                                        item.classList.add('list-group-item');
+
+                                                        // Добавляем ссылку на заявку
+                                                        item.innerHTML = `
+                                                            <a href="${application.url}" class="text-decoration-none">
+                                                                ${application.full_name} (ИИН: ${application.iin}, Телефон: ${application.phone_number}, Город: ${application.city})
+                                                            </a>
+                                                        `;
+
+                                                        resultsContainer.appendChild(item);
+                                                    });
+                                                } else {
+                                                    resultsContainer.innerHTML = '<li class="list-group-item">Нет результатов</li>';
+                                                }
+                                            });
+                                    } else {
+                                        resultsContainer.style.display = 'none';
+                                        resultsContainer.innerHTML = '';
+                                    }
+                                });
+
+                                </script>
                             </div>
                             <!-- Search and select END -->
 
@@ -281,7 +243,8 @@
                                     {% for application in applications %}
                                     <tr>
                                         <td><h6 class="mb-0">{{ application.id }}</h6></td>
-                                        <td><h6 class="mb-0"><a href="#">{{ application.full_name }}</a></h6></td>
+                                        <td><h6 class="mb-0"><a
+                                                href="{% url 'managers:application-detail' application.pk %}">{{ application.full_name }}</a></h6></td>
                                         <td> {{ application.phone_number }}</td>
                                         <td> {{ application.created_at|date:"d-m-Y H:i" }}</td>
                                         <td>
@@ -300,7 +263,8 @@
                                             <div class="badge bg-success bg-opacity-10 text-success">{{ application.amount }} KZT
                                             </div>
                                         </td>
-                                        <td><a href="#" class="btn btn-sm btn-light mb-0">Посмотреть</a></td>
+                                        <td><a href="{% url 'managers:application-detail' application.pk %}"
+                                               class="btn btn-sm btn-light mb-0">Посмотреть</a></td>
                                     </tr>
                                     {% empty %}
                                     <p>У вас нет заявок.</p>
