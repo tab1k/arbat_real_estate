@@ -63,32 +63,43 @@ class CustomUserUpdateView(UpdateView):
     model = CustomUser
     form_class = CustomUserUpdateForm
     template_name = 'users/settings.html'
-    success_url = reverse_lazy('users:profile')  # Страница, на которую будет перенаправляться после успешного обновления
+    success_url = reverse_lazy('users:profile')
 
     def get_object(self, queryset=None):
-        return self.request.user  # Обновляем только профиль текущего пользователя
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['password_form'] = PasswordChangeForm(user=self.request.user)  # Добавляем форму пароля
+        return context
 
     def form_valid(self, form):
-        # Здесь можно добавить дополнительные действия перед сохранением формы
+        messages.success(self.request, "Ваш профиль успешно обновлен!")
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
-        # Обработка смены пароля, если была отправлена форма
+        self.object = self.get_object()
+        form = self.get_form()  # Объявляем form перед логикой
+
         if 'password-change' in request.POST:
             password_form = PasswordChangeForm(user=request.user, data=request.POST)
             if password_form.is_valid():
                 user = request.user
-                user.set_password(password_form.cleaned_data['new_password'])
+                user.set_password(password_form.cleaned_data['new_password1'])
                 user.save()
-                update_session_auth_hash(request, user)  # Обновляем сессию, чтобы пользователь не вышел из системы
+                update_session_auth_hash(request, user)
                 messages.success(request, 'Ваш пароль был успешно изменен!')
-                return redirect('users:profile')  # Перенаправляем на профиль пользователя после изменения пароля
+                return redirect(self.success_url)
+            else:
+                messages.error(request, "Ошибка смены пароля. Проверьте введенные данные.")
         else:
-            password_form = PasswordChangeForm(user=request.user)
+            if form.is_valid():
+                return self.form_valid(form)
+            else:
+                messages.error(request, "Ошибка обновления профиля. Проверьте введенные данные.")
 
-        # Явно передаем обе формы в контекст шаблона
-        return self.render_to_response(self.get_context_data(form=self.get_form(), password_form=password_form))
-
+        return self.render_to_response(
+            self.get_context_data(form=form, password_form=PasswordChangeForm(user=request.user)))
 
 
 class ForgotPasswordView(View):

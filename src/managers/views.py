@@ -109,17 +109,22 @@ class AcceptedApplicationView(ListView):
 
 def search_applications(request):
     query = request.GET.get('q', '')
-    applications = MortgageApplication.objects.filter(
-        full_name__icontains=query
-    ) | MortgageApplication.objects.filter(
-        iin__icontains=query
-    ) | MortgageApplication.objects.filter(
-        phone_number__icontains=query
-    ) | MortgageApplication.objects.filter(
-        city__icontains=query
-    )
 
-    # Сформируйте данные для возврата
+    # Если query — это число, ищем по id
+    if query.isdigit():
+        applications = MortgageApplication.objects.filter(id=query)
+    else:
+        applications = MortgageApplication.objects.filter(
+            full_name__icontains=query
+        ) | MortgageApplication.objects.filter(
+            iin__icontains=query
+        ) | MortgageApplication.objects.filter(
+            phone_number__icontains=query
+        ) | MortgageApplication.objects.filter(
+            city__icontains=query
+        )
+
+    # Сформируем данные для возврата
     results = [{
         'id': application.id,
         'full_name': application.full_name,

@@ -129,7 +129,8 @@ class UserSignUpForm(UserCreationForm):
 
 
 
-class CustomUserUpdateForm(UserChangeForm):
+# Форма для обновления пользователя
+class CustomUserUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ('first_name', 'last_name', 'email', 'phone_number', 'date_of_birth', 'photo')
@@ -139,14 +140,13 @@ class CustomUserUpdateForm(UserChangeForm):
 
     def clean_phone_number(self):
         phone_number = self.cleaned_data.get('phone_number')
-        if phone_number:
-            # Проверка на уникальность номера
-            if CustomUser.objects.exclude(id=self.instance.id).filter(phone_number=phone_number).exists():
-                raise ValidationError("Этот номер телефона уже используется.")
+        if phone_number and CustomUser.objects.exclude(id=self.instance.id).filter(phone_number=phone_number).exists():
+            raise ValidationError("Этот номер телефона уже используется.")
         return phone_number
 
 
 
+# Форма смены пароля
 class PasswordChangeForm(forms.Form):
     current_password = forms.CharField(widget=forms.PasswordInput, label='Текущий пароль')
     new_password = forms.CharField(widget=forms.PasswordInput, label='Новый пароль')
@@ -161,6 +161,5 @@ class PasswordChangeForm(forms.Form):
             raise ValidationError("Новый пароль и подтверждение пароля не совпадают.")
 
         return cleaned_data
-
 
 

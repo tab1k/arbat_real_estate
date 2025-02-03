@@ -1,10 +1,258 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'app/base.html' %}
+{% load static widget_tweaks %}
 
-</body>
-</html>
+
+{% block content %}
+<main>
+
+    <!-- =======================
+    Menu item START -->
+    <section class="pt-4">
+        <div class="container">
+            <div class="card rounded-3 border p-3 pb-2">
+                <!-- Avatar and info START -->
+                <div class="d-sm-flex align-items-center">
+                    <div class="avatar avatar-xl mb-2 mb-sm-0">
+                        <img class="avatar-img rounded-circle"
+                             src="{% if user.photo %} {{ user.photo.url }} {% else %} {% static 'website/images/user.png' %}{% endif %}"
+                             alt="">
+                    </div>
+                    <h4 class="mb-2 mb-sm-0 ms-sm-3"><span class="fw-light">{% if user.first_name %} Здравствуй,</span>
+                        {{ user.first_name }} {{ user.last_name }} 👋 {% else %} <a
+                                style="color: black; font-size: 25px; text-decoration: underline;"
+                                href="{% url 'users:profile' %}">Заполните свои данные!</a>{% endif %}</h4>
+                    <a href="{% url 'realtors:create-request' %}" class="btn btn-sm mb-0 ms-auto flex-shrink-0"
+                       style="background-color: #099642; color: white;"><i
+                            class="bi bi-plus-lg fa-fw me-2"></i>Создать заявку</a>
+
+                    <style>
+                        @media (max-width: 767.98px) {
+                            a.btn.btn-sm.mb-0.ms-auto.flex-shrink-0 {
+                                width: 100%;
+                            }
+                            .d-sm-flex.align-items-center {
+                                text-align: center;
+                            }
+                        }
+                    </style>
+
+                </div>
+                <!-- Avatar and info START -->
+
+                <!-- Responsive navbar toggler -->
+                <button class="btn w-100 d-block d-xl-none mt-2" style="background-color: #099642; color: white;"
+                        type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#dashboardMenu" aria-controls="dashboardMenu">
+                    <i class="bi bi-list"></i> Приборная панель
+                </button>
+
+                <!-- Nav links START -->
+                <div class="offcanvas-xl offcanvas-end mt-xl-3" tabindex="-1" id="dashboardMenu">
+                    <div class="offcanvas-header border-bottom p-3">
+                        <h5 class="offcanvas-title">Меню</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                data-bs-target="#dashboardMenu" aria-label="Close"></button>
+                    </div>
+                    <!-- Offcanvas body -->
+                    <div class="offcanvas-body p-3 p-xl-0" style="justify-content: center;">
+                        <!-- Nav item -->
+                        <div class="navbar navbar-expand-xl">
+                            <ul class="navbar-nav navbar-offcanvas-menu">
+
+                                <li class="nav-item"><a class="nav-link"
+                                                        href="{% if user.role == 'manager' %}{% url 'managers:index' %}{% elif user.role == 'realtor' %}{% url 'realtors:index' %}{% else %}Error{% endif %}"><i
+                                        class="bi bi-house-door fa-fw me-1"></i>Приборная панель</a></li>
+
+                                <li><a class="nav-link active" href="{% url 'notifications:index' %}"><i
+                                        class="bi bi-bell" style="margin-right: 3px;"></i>Уведомления</a>
+                                </li>
+
+                                <!--                                <li class="nav-item dropdown">-->
+                                <!--                                    <a class="nav-link dropdown-toggle" href="#" id="dropdoanMenu"-->
+                                <!--                                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                <!--                                        <i class="bi bi-list-ul fa-fw me-1"></i>Dropdown-->
+                                <!--                                    </a>-->
+                                <!--                                    <ul class="dropdown-menu" aria-labelledby="dropdoanMenu">-->
+                                <!--                                        &lt;!&ndash; Dropdown menu &ndash;&gt;-->
+                                <!--                                        <li><a class="dropdown-item" href="#">Item 1</a></li>-->
+                                <!--                                        <li><a class="dropdown-item" href="#">Item 2</a></li>-->
+                                <!--                                    </ul>-->
+                                <!--                                </li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Nav links END -->
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Menu item END -->
+
+    <!-- =======================
+    Content START -->
+    <section class="pt-0">
+        <div class="container vstack gap-4">
+            <!-- Title START -->
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="fs-4 mb-0"><i class="bi bi-bell" style="margin-right: 3px;"></i>Уведомления</h1>
+                </div>
+            </div>
+            <!-- Title END -->
+
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card border">
+                        <!-- Card header -->
+                        <div class="card-header border-bottom">
+                            <h5 class="card-header-title">Последние уведомления</h5>
+                        </div>
+
+                        <!-- Card body START -->
+                        <div class="card-body">
+
+
+                            {% if notifications %}
+                            {% for notification in notifications %}
+                            <div class="d-sm-flex justify-content-between align-items-center"
+                                 id="notification-{{ notification.id }}">
+                                <div class="d-flex align-items-sm-center me-4 ms-sm-0">
+                                    <!-- Avatar -->
+                                    <div class="avatar flex-shrink-0">
+                                        <div class="avatar-img rounded-circle text-bg-success">
+                                            <span class="position-absolute top-50 start-50 translate-middle fw-bold"><i
+                                                    class="bi bi-check-lg fs-5"></i></span>
+                                        </div>
+                                    </div>
+                                    <!-- Title -->
+                                    <div class="ms-3">
+                                        <h6 class="fw-light m-0"><a href="{% if notification.application and notification.application.id %}
+                                        {% if request.user.role == 'realtor' %}
+                                        {% url 'realtors:application-detail' notification.application.id %}
+                                        {% else %}
+                                        {% url 'managers:application-detail' notification.application.id %}
+                                        {% endif %}
+                                        {% endif %}" class="text-primary">{{ notification.message }}</a></h6>
+                                        <small>{{ notification.created_at }}</small>
+                                    </div>
+                                </div>
+                                <!-- Buttons -->
+                                <div class="d-flex gap-2 mt-2 mt-sm-0">
+                                    {% if not notification.is_read %}
+                                    <button class="btn btn-sm btn-primary-soft mark-as-read"
+                                            data-id="{{ notification.id }}">
+                                        Прочитано
+                                    </button>
+                                    {% endif %}
+                                    <a href="#" class="btn btn-sm btn-danger-soft delete-notification"
+                                       data-id="{{ notification.id }}"><i class="bi bi-trash"></i></a>
+
+                                </div>
+                            </div>
+                            <hr>
+                            {% endfor %}
+                            {% else %}
+                            <p>У вас нет уведомлений.</p>
+                            <hr>
+                            {% endif %}
+
+                            <script>
+                                // При клике на кнопку "Прочитано"
+                                document.querySelectorAll('.mark-as-read').forEach(button => {
+                                    button.addEventListener('click', function(event) {
+                                        event.preventDefault();
+                                        const notificationId = this.getAttribute('data-id');
+                                        const notificationElement = document.getElementById(`notification-${notificationId}`);
+
+                                        // Отправляем AJAX запрос
+                                        fetch("{% url 'notifications:mark_notification_as_read' 0 %}".replace('0', notificationId), {
+                                            method: 'GET',  // Можно также использовать POST
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+                                            },
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            if (data.message === "Уведомление отмечено как прочитанное") {
+                                                // Если успешно, скрываем кнопку и обновляем уведомление
+                                                notificationElement.querySelector('.mark-as-read').style.display = 'none';
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error('Ошибка:', error);
+                                        });
+                                    });
+                                });
+
+                                // При клике на кнопку "Удалить"
+                                document.querySelectorAll('.delete-notification').forEach(button => {
+                                    button.addEventListener('click', function(event) {
+                                        event.preventDefault(); // Отменяем стандартное поведение ссылки
+                                        const notificationId = this.getAttribute('data-id');  // Получаем ID уведомления
+                                        const notificationElement = document.getElementById(`notification-${notificationId}`); // Элемент уведомления
+
+                                        // Отправляем AJAX запрос для удаления уведомления
+                                        fetch("{% url 'notifications:delete_notification' 0 %}".replace('0', notificationId), {
+                                            method: 'DELETE',  // Используем метод DELETE
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,  // CSRF токен
+                                            },
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            if (data.message === "Уведомление удалено") {
+                                                // Если уведомление успешно удалено, удаляем его с интерфейса
+                                                notificationElement.remove();
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error('Ошибка:', error);
+                                        });
+                                    });
+                                });
+                            </script>
+
+
+                            <!-- Activity item END -->
+
+                            <!-- Divider -->
+
+                            <!-- Activity item START -->
+                            <div class="d-sm-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-sm-center me-4 ms-sm-0">
+                                    <!-- Avatar -->
+                                    <div class="avatar flex-shrink-0">
+                                        <div class="avatar-img rounded-circle text-bg-info">
+                                                <span class="position-absolute top-50 start-50 translate-middle fw-bold"><i
+                                                        class="bi bi-chat fs-5"></i></span>
+                                        </div>
+                                    </div>
+                                    <!-- Title -->
+                                    <div class="ms-3">
+                                        <h6 class="fw-light m-0">Привет, <span
+                                                class="fw-bold">{{ user.first_name }} !</span></h6>
+                                        <small class="me-3">3 фев 2025</small>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Activity item END -->
+
+
+                        </div>
+                        <!-- Card body END -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- =======================
+    Content END -->
+
+</main>
+{% endblock %}
